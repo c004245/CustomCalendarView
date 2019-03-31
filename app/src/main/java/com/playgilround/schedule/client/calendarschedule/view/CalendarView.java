@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ public class CalendarView extends LinearLayout {
 
     private CalendarProperties mCalendarProperties;
 
+    private TextView tvDate;
+    private ViewPager viewPager;
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -26,6 +29,7 @@ public class CalendarView extends LinearLayout {
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initControl(context, attrs);
+        initCalendar();
     }
 
     private void initControl(Context context, AttributeSet attrs) {
@@ -39,9 +43,11 @@ public class CalendarView extends LinearLayout {
     }
 
     private void initUIElements() {
-        TextView tvDate = findViewById(R.id.tvDate);
+        tvDate = findViewById(R.id.tvDate);
+        viewPager = findViewById(R.id.calendarViewPager);
+    }
 
-
-
+    private void initCalendar() {
+//        mCalendar
     }
 }
