@@ -103,6 +103,16 @@
             android:textColor="@color/color_gray_day" />
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.playgilround.schedule.client.calendarschedule.view.CalendarViewPager
+            android:id="@+id/calendarViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
 
 
 </LinearLayout>
