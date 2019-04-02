@@ -2,6 +2,8 @@ package com.playgilround.schedule.client.calendarschedule.util;
 
 import android.content.Context;
 
+import org.joda.time.DateTime;
+
 /**
  * 19-03-31
  * all properties of the calendar.
@@ -16,7 +18,12 @@ public class CalendarProperties {
 
     private Context mContext;
 
+    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
     public CalendarProperties(Context context) {
         mContext = context;
+    }
+
+    public DateTime getFirstPageDate() {
+        return mFirstPageCalendarDate;
     }
 }

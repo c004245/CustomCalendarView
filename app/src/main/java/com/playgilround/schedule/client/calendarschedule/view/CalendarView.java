@@ -8,11 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.playgilround.schedule.client.calendarschedule.R;
+import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 
-import org.w3c.dom.Text;
+import org.joda.time.DateTime;
 
-import java.util.jar.Attributes;
+import java.util.Calendar;
 
 public class CalendarView extends LinearLayout {
 
@@ -21,7 +22,11 @@ public class CalendarView extends LinearLayout {
     private CalendarProperties mCalendarProperties;
 
     private TextView tvDate;
-    private ViewPager viewPager;
+    private CalendarViewPager mViewPager;
+
+
+    private CalendarPageAdapter mCalendarPageAdapter;
+
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -44,10 +49,36 @@ public class CalendarView extends LinearLayout {
 
     private void initUIElements() {
         tvDate = findViewById(R.id.tvDate);
-        viewPager = findViewById(R.id.calendarViewPager);
+        mViewPager = findViewById(R.id.calendarViewPager);
     }
 
     private void initCalendar() {
-//        mCalendar
+        mCalendarPageAdapter = new CalendarPageAdapter(mContext, mCalendarProperties);
+
+        mViewPager.setAdapter(mCalendarPageAdapter);
+        mViewPager.addOnPageChangeListener(onPageChangeListener);
+
     }
+
+    //ViewPager Listener
+    private final ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int i, float v, int i1) {
+
+        }
+
+        @Override
+        public void onPageSelected(int i) {
+            DateTime calendar =  mCalendarProperties.getFirstPageDate();
+            calendar.plusMonths(i);
+
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+
+        }
+    };
+
 }
