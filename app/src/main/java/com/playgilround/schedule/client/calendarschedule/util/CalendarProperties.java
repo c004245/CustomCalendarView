@@ -2,6 +2,8 @@ package com.playgilround.schedule.client.calendarschedule.util;
 
 import android.content.Context;
 
+import com.playgilround.schedule.client.calendarschedule.listener.OnCalendarPageChangeListener;
+
 import org.joda.time.DateTime;
 
 /**
@@ -17,6 +19,10 @@ public class CalendarProperties {
     public static final int CALENDAR_SIZE = 2401;
 
     private Context mContext;
+
+
+    private OnCalendarPageChangeListener mOnForwardPageChangeListener;
+    private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
 
     private DateTime mMinimumDate, mMaximumDate;
     private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
@@ -45,4 +51,25 @@ public class CalendarProperties {
     public void setMaximumDate(DateTime maximumDate) {
         mMaximumDate = maximumDate;
     }
+
+    //다음 달
+    public OnCalendarPageChangeListener getOnForwardPageChangeListener() {
+        return mOnForwardPageChangeListener;
+    }
+
+    public void setOnForwardPageChangeListener(OnCalendarPageChangeListener onForwardPageChangeListener) {
+        mOnForwardPageChangeListener = onForwardPageChangeListener;
+    }
+
+    //저번 달
+    public OnCalendarPageChangeListener getOnPreviousPageChangeListener() {
+        return mOnPreviousPageChangeListener;
+    }
+
+    public void setOnPreviousPageChangeListener(OnCalendarPageChangeListener onPreviousPageChangeListener) {
+        mOnPreviousPageChangeListener = onPreviousPageChangeListener;
+    }
+
+
+
 }

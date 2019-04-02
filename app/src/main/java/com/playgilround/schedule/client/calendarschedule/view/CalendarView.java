@@ -26,6 +26,7 @@ public class CalendarView extends LinearLayout {
     private TextView tvDate;
     private CalendarViewPager mViewPager;
 
+    private int mCurrentPage;
 
     private CalendarPageAdapter mCalendarPageAdapter;
 
@@ -89,7 +90,21 @@ public class CalendarView extends LinearLayout {
     private void setHeaderName(DateTime dateTime, int position) {
         tvDate.setText(DateUtils.getMonthAndYearDate(mContext, dateTime));
         Log.d(TAG, "Text Date --->" + DateUtils.getMonthAndYearDate(mContext, dateTime));
+        callOnPageChangeListeners(position);
     }
+
+    private void callOnPageChangeListeners(int position) {
+        if (position > mCurrentPage && mCalendarProperties.getOnForwardPageChangeListener() != null) {
+            mCalendarProperties.getOnForwardPageChangeListener().onChange();
+        }
+
+        if (position < mCurrentPage && mCalendarProperties.getOnPreviousPageChangeListener() != null) {
+            mCalendarProperties.getOnPreviousPageChangeListener().onChange();
+        }
+
+        mCurrentPage = position;
+    }
+
 
     //스크롤 최대 판단
     private boolean isScrollingLimited(DateTime dateTime, int position) {
