@@ -18,12 +18,31 @@ public class CalendarProperties {
 
     private Context mContext;
 
+    private DateTime mMinimumDate, mMaximumDate;
     private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
+
+
     public CalendarProperties(Context context) {
         mContext = context;
     }
 
     public DateTime getFirstPageDate() {
         return mFirstPageCalendarDate;
+    }
+
+    public DateTime getMinimumDate() {
+        return mMinimumDate;
+    }
+
+    public void setMinimumDate(DateTime minimumDate) {
+        mMinimumDate = minimumDate;
+    }
+
+    public DateTime getMaximumDate() {
+        return mMaximumDate;
+    }
+
+    public void setMaximumDate(DateTime maximumDate) {
+        mMaximumDate = maximumDate;
     }
 }

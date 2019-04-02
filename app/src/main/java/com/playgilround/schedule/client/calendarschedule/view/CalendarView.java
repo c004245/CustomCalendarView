@@ -3,6 +3,7 @@ package com.playgilround.schedule.client.calendarschedule.view;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -10,12 +11,13 @@ import android.widget.TextView;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
+import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
 
 import org.joda.time.DateTime;
 
-import java.util.Calendar;
-
 public class CalendarView extends LinearLayout {
+
+    private static final String TAG = CalendarView.class.getSimpleName();
 
     private Context mContext;
 
@@ -68,11 +70,14 @@ public class CalendarView extends LinearLayout {
         }
 
         @Override
-        public void onPageSelected(int i) {
+        public void onPageSelected(int position) {
             DateTime calendar =  mCalendarProperties.getFirstPageDate();
-            calendar.plusMonths(i);
+            calendar.plusMonths(position);
 
-
+            Log.d(TAG, "PlusDate ->" +position);
+            if (!isScrollingLimited(calendar, position)) {
+                setHeaderName(calendar, position);
+            }
         }
 
         @Override
@@ -80,5 +85,25 @@ public class CalendarView extends LinearLayout {
 
         }
     };
+
+    private void setHeaderName(DateTime dateTime, int position) {
+        tvDate.setText(DateUtils.getMonthAndYearDate(mContext, dateTime));
+        Log.d(TAG, "Text Date --->" + DateUtils.getMonthAndYearDate(mContext, dateTime));
+    }
+
+    //스크롤 최대 판단
+    private boolean isScrollingLimited(DateTime dateTime, int position) {
+        if (DateUtils.isMonthBefore(mCalendarProperties.getMinimumDate(), dateTime)) {
+            mViewPager.setCurrentItem(position + 1);
+            return true;
+        }
+
+        if (DateUtils.isMonthAfter(mCalendarProperties.getMaximumDate(), dateTime)) {
+            mViewPager.setCurrentItem(position -1);
+            return true;
+        }
+
+        return false;
+    }
 
 }

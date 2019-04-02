@@ -8,4 +8,20 @@
     <string name="material_calendar_friday">금</string>
     <string name="material_calendar_saturday">토</string>
     <string name="material_calendar_sunday">일</string>
+
+    <array name="material_calendar_months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
 </resources>
