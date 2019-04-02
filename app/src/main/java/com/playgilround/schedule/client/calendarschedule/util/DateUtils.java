@@ -15,6 +15,16 @@ public class DateUtils {
         return new DateTime();
     }
 
+    public static Calendar getCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar;
+    }
+
     public static boolean isMonthBefore(DateTime firstDT, DateTime secondDT) {
         if (firstDT == null) {
             return false;

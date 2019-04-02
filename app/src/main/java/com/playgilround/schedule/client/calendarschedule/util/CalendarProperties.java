@@ -6,6 +6,8 @@ import com.playgilround.schedule.client.calendarschedule.listener.OnCalendarPage
 
 import org.joda.time.DateTime;
 
+import java.util.Calendar;
+
 /**
  * 19-03-31
  * all properties of the calendar.
@@ -25,14 +27,17 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
 
     private DateTime mMinimumDate, mMaximumDate;
-    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
+//    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
+    private Calendar mFirstPageCalendarDate = DateUtils.getCalendar();
+
 
 
     public CalendarProperties(Context context) {
         mContext = context;
     }
 
-    public DateTime getFirstPageDate() {
+//    public DateTime getFirstPageDate() {
+    public Calendar getFirstPageDate() {
         return mFirstPageCalendarDate;
     }
 
