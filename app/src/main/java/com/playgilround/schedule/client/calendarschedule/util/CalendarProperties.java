@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.playgilround.schedule.client.calendarschedule.listener.OnCalendarPageChangeListener;
 
-import org.joda.time.DateTime;
-
 import java.util.Calendar;
 
 /**
@@ -26,7 +24,8 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
     private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
 
-    private DateTime mMinimumDate, mMaximumDate;
+    //private DateTime mMinimumDate, mMaximumDate;
+    private Calendar mMinimumDate, mMaximumDate;
 //    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
     private Calendar mFirstPageCalendarDate = DateUtils.getCalendar();
 
@@ -41,19 +40,19 @@ public class CalendarProperties {
         return mFirstPageCalendarDate;
     }
 
-    public DateTime getMinimumDate() {
+    public Calendar getMinimumDate() {
         return mMinimumDate;
     }
 
-    public void setMinimumDate(DateTime minimumDate) {
+    public void setMinimumDate(Calendar minimumDate) {
         mMinimumDate = minimumDate;
     }
 
-    public DateTime getMaximumDate() {
+    public Calendar getMaximumDate() {
         return mMaximumDate;
     }
 
-    public void setMaximumDate(DateTime maximumDate) {
+    public void setMaximumDate(Calendar maximumDate) {
         mMaximumDate = maximumDate;
     }
 

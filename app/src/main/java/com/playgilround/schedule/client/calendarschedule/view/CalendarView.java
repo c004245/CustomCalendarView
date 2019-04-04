@@ -13,7 +13,7 @@ import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAda
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
 
-import org.joda.time.DateTime;
+import java.util.Calendar;
 
 public class CalendarView extends LinearLayout {
 
@@ -72,8 +72,9 @@ public class CalendarView extends LinearLayout {
 
         @Override
         public void onPageSelected(int position) {
-            DateTime calendar =  mCalendarProperties.getFirstPageDate();
-            calendar.plusMonths(position);
+            Calendar calendar =  mCalendarProperties.getFirstPageDate();
+            //calendar.plusMonths(position);
+            calendar.add(Calendar.MONTH, position);
 
             Log.d(TAG, "PlusDate ->" +position);
             if (!isScrollingLimited(calendar, position)) {
@@ -87,7 +88,7 @@ public class CalendarView extends LinearLayout {
         }
     };
 
-    private void setHeaderName(DateTime dateTime, int position) {
+    private void setHeaderName(Calendar dateTime, int position) {
         tvDate.setText(DateUtils.getMonthAndYearDate(mContext, dateTime));
         Log.d(TAG, "Text Date --->" + DateUtils.getMonthAndYearDate(mContext, dateTime));
         callOnPageChangeListeners(position);
@@ -107,13 +108,13 @@ public class CalendarView extends LinearLayout {
 
 
     //스크롤 최대 판단
-    private boolean isScrollingLimited(DateTime dateTime, int position) {
-        if (DateUtils.isMonthBefore(mCalendarProperties.getMinimumDate(), dateTime)) {
+    private boolean isScrollingLimited(Calendar calendar, int position) {
+        if (DateUtils.isMonthBefore(mCalendarProperties.getMinimumDate(), calendar)) {
             mViewPager.setCurrentItem(position + 1);
             return true;
         }
 
-        if (DateUtils.isMonthAfter(mCalendarProperties.getMaximumDate(), dateTime)) {
+        if (DateUtils.isMonthAfter(mCalendarProperties.getMaximumDate(), calendar)) {
             mViewPager.setCurrentItem(position -1);
             return true;
         }
