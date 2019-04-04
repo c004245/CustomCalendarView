@@ -11,8 +11,6 @@ import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarGridView;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -89,6 +87,7 @@ public class CalendarPageAdapter extends PagerAdapter {
         }
 
         mPageMonth = calendar.get(Calendar.MONTH) - 1;
+        //CalendarDayAdapter calendarDayAdapter = new CalendarDay
 
     }
 }

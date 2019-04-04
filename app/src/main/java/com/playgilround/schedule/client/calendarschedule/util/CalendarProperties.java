@@ -29,6 +29,7 @@ public class CalendarProperties {
 //    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
     private Calendar mFirstPageCalendarDate = DateUtils.getCalendar();
 
+    private int mItemLayoutResource;
 
 
     public CalendarProperties(Context context) {
@@ -74,6 +75,12 @@ public class CalendarProperties {
         mOnPreviousPageChangeListener = onPreviousPageChangeListener;
     }
 
+    public int getItemLayoutResource() {
+        return mItemLayoutResource;
+    }
+    public void setItemLayoutResource(int itemLayoutResource) {
+        mItemLayoutResource = itemLayoutResource;
+    }
 
 
 }

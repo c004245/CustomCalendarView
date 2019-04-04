@@ -48,6 +48,7 @@ public class CalendarView extends LinearLayout {
         inflater.inflate(R.layout.calendar_view, this);
 
         initUIElements();
+        //setAttributes(attrs);
     }
 
     private void initUIElements() {
@@ -60,8 +61,9 @@ public class CalendarView extends LinearLayout {
 
         mViewPager.setAdapter(mCalendarPageAdapter);
         mViewPager.addOnPageChangeListener(onPageChangeListener);
-
     }
+
+    //set xml values for calendar elements
 
     //ViewPager Listener
     private final ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
