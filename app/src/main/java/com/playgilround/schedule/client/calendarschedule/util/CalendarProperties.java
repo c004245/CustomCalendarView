@@ -21,6 +21,7 @@ public class CalendarProperties {
 
 
     public static final int CALENDAR_SIZE = 2401;
+    public static final int FIRST_VISIBLE_PAGE = CALENDAR_SIZE / 2;
 
     private Context mContext;
 

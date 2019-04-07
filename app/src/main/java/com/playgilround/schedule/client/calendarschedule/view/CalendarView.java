@@ -18,6 +18,8 @@ import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
 
 import java.util.Calendar;
 
+import static com.playgilround.schedule.client.calendarschedule.util.CalendarProperties.FIRST_VISIBLE_PAGE;
+
 public class CalendarView extends LinearLayout {
 
     public static final int CLASSIC = 0;
@@ -145,6 +147,21 @@ public class CalendarView extends LinearLayout {
 
         mViewPager.setAdapter(mCalendarPageAdapter);
         mViewPager.addOnPageChangeListener(onPageChangeListener);
+
+        setUpCalendarPosition(Calendar.getInstance());
+    }
+
+    private void setUpCalendarPosition(Calendar calendar) {
+        DateUtils.setMidnight(calendar);
+
+        if (mCalendarProperties.getCalendarType() == CalendarView.ONE_DAY_PICKER) {
+
+        }
+
+        mCalendarProperties.getFirstPageDate().setTime(calendar.getTime());
+        mCalendarProperties.getFirstPageDate().add(Calendar.MONTH, -FIRST_VISIBLE_PAGE);
+
+        mViewPager.setCurrentItem(FIRST_VISIBLE_PAGE);
     }
 
     //set xml values for calendar elements

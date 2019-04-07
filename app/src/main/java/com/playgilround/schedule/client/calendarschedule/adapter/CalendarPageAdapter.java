@@ -87,7 +87,14 @@ public class CalendarPageAdapter extends PagerAdapter {
         }
 
         mPageMonth = calendar.get(Calendar.MONTH) - 1;
-        //CalendarDayAdapter calendarDayAdapter = new CalendarDay
+        CalendarDayAdapter calendarDayAdapter = new CalendarDayAdapter(this, mContext,
+                mCalendarProperties, days, mPageMonth);
 
+        mCalendarGridView.setAdapter(calendarDayAdapter);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
     }
 }
