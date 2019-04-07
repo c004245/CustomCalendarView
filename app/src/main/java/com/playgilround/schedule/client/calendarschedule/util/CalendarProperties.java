@@ -26,7 +26,7 @@ public class CalendarProperties {
 
     private int mHeaderColor, mHeaderLabelColor, mAbbreviationsBarColor, mAbbreviationsLabelsColor,
             mPagesColor, mDaysLabelsColor, mAnotherMonthsDaysLabelsColor, mCalendarType,
-            mDisabledDaysLabelsColor, mSelectionLabelColor, mSelectionColor, mTodayLabelColor;
+            mDisabledDaysLabelsColor, mSelectionLabelColor, mSelectionColor, mTodayLabelColor, mHeaderVisibility;
 
     private Drawable mPreviousButtonSrc, mForwardButtonSrc;
 
@@ -116,6 +116,13 @@ public class CalendarProperties {
         mHeaderLabelColor = headerLabelColor;
     }
 
+    public int getHeaderVisibility() {
+        return mHeaderVisibility;
+    }
+
+    public void setHeaderVisibility(int headerVisibility) {
+        mHeaderVisibility = headerVisibility;
+    }
     public int getAbbreviationsBarColor() {
         return mAbbreviationsBarColor;
     }
@@ -227,21 +234,5 @@ public class CalendarProperties {
 
     public void setEventsEnabled(boolean eventsEnabled) {
         mEventsEnabled = eventsEnabled;
-    }
-
-    public Drawable getPreviousButtonSrc() {
-        return mPreviousButtonSrc;
-    }
-
-    public void setPreviousButtonSrc(Drawable previousButtonSrc) {
-        mPreviousButtonSrc = previousButtonSrc;
-    }
-
-    public Drawable getForwardButtonSrc() {
-        return mForwardButtonSrc;
-    }
-
-    public void setForwardButtonSrc(Drawable forwardButtonSrc) {
-        mForwardButtonSrc = forwardButtonSrc;
     }
 }

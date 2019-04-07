@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
+import com.playgilround.schedule.client.calendarschedule.util.AppearanceUtils;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
 
@@ -62,6 +63,13 @@ public class CalendarView extends LinearLayout {
 
     private void setAttributes(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CalendarView);
+
+        try {
+            initCalendarProperties(typedArray);
+            initAttributes();
+        } finally {
+            typedArray.recycle();
+        }
     }
 
     private void initUIElements() {
@@ -114,14 +122,23 @@ public class CalendarView extends LinearLayout {
         boolean eventsEnabled = typedArray.getBoolean(R.styleable.CalendarView_eventsEnabled,
                 mCalendarProperties.getCalendarType() == CLASSIC);
         mCalendarProperties.setEventsEnabled(eventsEnabled);
-
-        Drawable previousButtonSrc = typedArray.getDrawable(R.styleable.CalendarView_previousButtonSrc);
-        mCalendarProperties.setPreviousButtonSrc(previousButtonSrc);
-
-        Drawable forwardButtonSrc = typedArray.getDrawable(R.styleable.CalendarView_forwardButtonSrc);
-        mCalendarProperties.setForwardButtonSrc(forwardButtonSrc);
     }
 
+    private void initAttributes() {
+        AppearanceUtils.setHeaderColor(getRootView(), mCalendarProperties.getHeaderColor());
+
+        AppearanceUtils.setHeaderVisibility(getRootView(), mCalendarProperties.getHeaderVisibility());
+
+        AppearanceUtils.setHeaderLabelColor(getRootView(), mCalendarProperties.getHeaderLabelColor());
+
+        AppearanceUtils.setAbbreviationsBarColor(getRootView(), mCalendarProperties.getAbbreviationsBarColor());
+
+        AppearanceUtils.setAbbreviationsLabels(getRootView(), mCalendarProperties.getAbbreviationsLabelsColor(),
+                mCalendarProperties.getFirstPageDate().getFirstDayOfWeek());
+
+        AppearanceUtils.setPagesColor(getRootView(), mCalendarProperties.getPagesColor());
+
+    }
 
     private void initCalendar() {
         mCalendarPageAdapter = new CalendarPageAdapter(mContext, mCalendarProperties);
