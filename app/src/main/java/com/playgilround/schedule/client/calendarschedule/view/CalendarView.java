@@ -1,6 +1,8 @@
 package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -17,6 +19,11 @@ import java.util.Calendar;
 
 public class CalendarView extends LinearLayout {
 
+    public static final int CLASSIC = 0;
+    public static final int ONE_DAY_PICKER = 1;
+    public static final int MANY_DAYS_PICKER = 2;
+    public static final int RANGE_PICKER = 3;
+
     private static final String TAG = CalendarView.class.getSimpleName();
 
     private Context mContext;
@@ -32,6 +39,8 @@ public class CalendarView extends LinearLayout {
 
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initControl(context, attrs);
+        initCalendar();
     }
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -48,13 +57,71 @@ public class CalendarView extends LinearLayout {
         inflater.inflate(R.layout.calendar_view, this);
 
         initUIElements();
-        //setAttributes(attrs);
+        setAttributes(attrs);
+    }
+
+    private void setAttributes(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CalendarView);
     }
 
     private void initUIElements() {
         tvDate = findViewById(R.id.tvDate);
         mViewPager = findViewById(R.id.calendarViewPager);
     }
+
+    //Calendar Properties Setting.
+    private void initCalendarProperties(TypedArray typedArray) {
+        int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
+        mCalendarProperties.setHeaderColor(headerColor);
+
+        int headerLabelColor = typedArray.getColor(R.styleable.CalendarView_headerLabelColor, 0);
+        mCalendarProperties.setHeaderLabelColor(headerLabelColor);
+
+        int abbreviationsBarColor = typedArray.getColor(R.styleable.CalendarView_abbreviationsBarColor, 0);
+        mCalendarProperties.setAbbreviationsBarColor(abbreviationsBarColor);
+
+        int abbreviationsLabelsColor = typedArray.getColor(R.styleable.CalendarView_abbreviationsLabelsColor, 0);
+        mCalendarProperties.setAbbreviationsLabelsColor(abbreviationsLabelsColor);
+
+        int pagesColor = typedArray.getColor(R.styleable.CalendarView_pagesColor, 0);
+        mCalendarProperties.setPagesColor(pagesColor);
+
+        int daysLabelsColor = typedArray.getColor(R.styleable.CalendarView_daysLabelsColor, 0);
+        mCalendarProperties.setDaysLabelsColor(daysLabelsColor);
+
+        int anotherMonthsDaysLabelsColor = typedArray.getColor(R.styleable.CalendarView_anotherMonthsDaysLabelsColor, 0);
+        mCalendarProperties.setAnotherMonthsDaysLabelsColor(anotherMonthsDaysLabelsColor);
+
+        int todayLabelColor = typedArray.getColor(R.styleable.CalendarView_todayLabelColor, 0);
+        mCalendarProperties.setTodayLabelColor(todayLabelColor);
+
+        int selectionColor = typedArray.getColor(R.styleable.CalendarView_selectionColor, 0);
+        mCalendarProperties.setSelectionColor(selectionColor);
+
+        int selectionLabelColor = typedArray.getColor(R.styleable.CalendarView_selectionLabelColor, 0);
+        mCalendarProperties.setSelectionLabelColor(selectionLabelColor);
+
+        int disabledDaysLabelsColor = typedArray.getColor(R.styleable.CalendarView_disabledDaysLabelsColor, 0);
+        mCalendarProperties.setDisabledDaysLabelsColor(disabledDaysLabelsColor);
+
+        int calendarType = typedArray.getInt(R.styleable.CalendarView_type, CLASSIC);
+        mCalendarProperties.setCalendarType(calendarType);
+
+        if (typedArray.getBoolean(R.styleable.CalendarView_datePicker, false)) {
+            mCalendarProperties.setCalendarType(ONE_DAY_PICKER);
+        }
+
+        boolean eventsEnabled = typedArray.getBoolean(R.styleable.CalendarView_eventsEnabled,
+                mCalendarProperties.getCalendarType() == CLASSIC);
+        mCalendarProperties.setEventsEnabled(eventsEnabled);
+
+        Drawable previousButtonSrc = typedArray.getDrawable(R.styleable.CalendarView_previousButtonSrc);
+        mCalendarProperties.setPreviousButtonSrc(previousButtonSrc);
+
+        Drawable forwardButtonSrc = typedArray.getDrawable(R.styleable.CalendarView_forwardButtonSrc);
+        mCalendarProperties.setForwardButtonSrc(forwardButtonSrc);
+    }
+
 
     private void initCalendar() {
         mCalendarPageAdapter = new CalendarPageAdapter(mContext, mCalendarProperties);
@@ -74,11 +141,11 @@ public class CalendarView extends LinearLayout {
 
         @Override
         public void onPageSelected(int position) {
-            Calendar calendar =  mCalendarProperties.getFirstPageDate();
+            Calendar calendar = mCalendarProperties.getFirstPageDate();
             //calendar.plusMonths(position);
             calendar.add(Calendar.MONTH, position);
 
-            Log.d(TAG, "PlusDate ->" +position);
+            Log.d(TAG, "PlusDate ->" + position);
             if (!isScrollingLimited(calendar, position)) {
                 setHeaderName(calendar, position);
             }
@@ -117,7 +184,7 @@ public class CalendarView extends LinearLayout {
         }
 
         if (DateUtils.isMonthAfter(mCalendarProperties.getMaximumDate(), calendar)) {
-            mViewPager.setCurrentItem(position -1);
+            mViewPager.setCurrentItem(position - 1);
             return true;
         }
 

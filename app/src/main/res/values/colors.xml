@@ -10,5 +10,7 @@
     <color name="itemHighlightColor">#1F000000</color>
     <color name="nextMonthDayColor">#1F000000</color>
 
+    <color name="currentMonthDayColor">#de000000</color>
+    <color name="defaultColor">#2962FF</color>
 
 </resources>

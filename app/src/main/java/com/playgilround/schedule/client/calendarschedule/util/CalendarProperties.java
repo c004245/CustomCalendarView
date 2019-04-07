@@ -1,7 +1,10 @@
 package com.playgilround.schedule.client.calendarschedule.util;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
+import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.listener.OnCalendarPageChangeListener;
 
 import java.util.Calendar;
@@ -16,10 +19,18 @@ public class CalendarProperties {
      * 이 캘린더는 현재 기준으로 과거, 미래 +-100년으로 표시됨
      */
 
+
     public static final int CALENDAR_SIZE = 2401;
 
     private Context mContext;
 
+    private int mHeaderColor, mHeaderLabelColor, mAbbreviationsBarColor, mAbbreviationsLabelsColor,
+            mPagesColor, mDaysLabelsColor, mAnotherMonthsDaysLabelsColor, mCalendarType,
+            mDisabledDaysLabelsColor, mSelectionLabelColor, mSelectionColor, mTodayLabelColor;
+
+    private Drawable mPreviousButtonSrc, mForwardButtonSrc;
+
+    private boolean mEventsEnabled;
 
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
     private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
@@ -82,5 +93,155 @@ public class CalendarProperties {
         mItemLayoutResource = itemLayoutResource;
     }
 
+    public int getHeaderColor() {
+        if (mHeaderColor <= 0) {
+            return mHeaderColor;
+        }
 
+        return ContextCompat.getColor(mContext, mHeaderColor);
+    }
+
+    public void setHeaderColor(int headerColor) {
+        mHeaderColor = headerColor;
+    }
+
+    public int getHeaderLabelColor() {
+        if (mHeaderLabelColor <= 0) {
+            return mHeaderLabelColor;
+        }
+        return ContextCompat.getColor(mContext, mHeaderLabelColor);
+    }
+
+    public void setHeaderLabelColor(int headerLabelColor) {
+        mHeaderLabelColor = headerLabelColor;
+    }
+
+    public int getAbbreviationsBarColor() {
+        return mAbbreviationsBarColor;
+    }
+
+    public void setAbbreviationsBarColor(int abbreviationsBarColor) {
+        mAbbreviationsBarColor = abbreviationsBarColor;
+    }
+
+    public int getAbbreviationsLabelsColor() {
+        return mAbbreviationsLabelsColor;
+    }
+
+    public void setAbbreviationsLabelsColor(int abbreviationsLabelsColor) {
+        mAbbreviationsLabelsColor = abbreviationsLabelsColor;
+    }
+
+    public int getPagesColor() {
+        return mPagesColor;
+    }
+
+    public void setPagesColor(int pagesColor) {
+        mPagesColor = pagesColor;
+    }
+
+
+    public int getDaysLabelsColor() {
+        if (mDaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.currentMonthDayColor);
+        }
+
+        return mDaysLabelsColor;
+    }
+
+    public void setDaysLabelsColor(int daysLabelsColor) {
+        mDaysLabelsColor = daysLabelsColor;
+    }
+
+    public int getAnotherMonthsDaysLabelsColor() {
+        if (mAnotherMonthsDaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.nextMonthDayColor);
+        }
+
+        return mAnotherMonthsDaysLabelsColor;
+    }
+
+    public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {
+        mAnotherMonthsDaysLabelsColor = anotherMonthsDaysLabelsColor;
+    }
+
+    public int getTodayLabelColor() {
+        if (mTodayLabelColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.defaultColor);
+        }
+
+        return mTodayLabelColor;
+    }
+
+    public void setTodayLabelColor(int todayLabelColor) {
+        mTodayLabelColor = todayLabelColor;
+    }
+
+    public int getSelectionColor() {
+        if (mSelectionColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.defaultColor);
+        }
+
+        return mSelectionColor;
+    }
+
+    public void setSelectionColor(int selectionColor) {
+        mSelectionColor = selectionColor;
+    }
+
+    public int getSelectionLabelColor() {
+        if (mSelectionLabelColor == 0) {
+            return ContextCompat.getColor(mContext, android.R.color.white);
+        }
+
+        return mSelectionLabelColor;
+    }
+
+    public void setSelectionLabelColor(int selectionLabelColor) {
+        mSelectionLabelColor = selectionLabelColor;
+    }
+
+    public int getDisabledDaysLabelsColor() {
+        if (mDisabledDaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.nextMonthDayColor);
+        }
+
+        return mDisabledDaysLabelsColor;
+    }
+
+    public void setDisabledDaysLabelsColor(int disabledDaysLabelsColor) {
+        mDisabledDaysLabelsColor = disabledDaysLabelsColor;
+    }
+
+    public int getCalendarType() {
+        return mCalendarType;
+    }
+
+    public void setCalendarType(int calendarType) {
+        mCalendarType = calendarType;
+    }
+
+    public boolean getEventsEnabled() {
+        return mEventsEnabled;
+    }
+
+    public void setEventsEnabled(boolean eventsEnabled) {
+        mEventsEnabled = eventsEnabled;
+    }
+
+    public Drawable getPreviousButtonSrc() {
+        return mPreviousButtonSrc;
+    }
+
+    public void setPreviousButtonSrc(Drawable previousButtonSrc) {
+        mPreviousButtonSrc = previousButtonSrc;
+    }
+
+    public Drawable getForwardButtonSrc() {
+        return mForwardButtonSrc;
+    }
+
+    public void setForwardButtonSrc(Drawable forwardButtonSrc) {
+        mForwardButtonSrc = forwardButtonSrc;
+    }
 }
