@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
+import com.playgilround.schedule.client.calendarschedule.util.DayColorsUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,9 +57,33 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         //Loading an Image of the event.
         if (ivDay != null) {
-
+            loadIcon(ivDay, day);
         }
 
+        setLabelColors(tvDay, day);
+
+        tvDay.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
         return view;
+    }
+
+    private void setLabelColors(TextView tvLabel, Calendar day) {
+        //Setting not current month day color
+        if (!isCurrentMonthDay(day)) {
+            DayColorsUtils.setDayColors(tvLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
+                    Typeface.NORMAL, R.drawable.background_transparent);
+            return;
+        }
+
+        DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
+
+    }
+
+    private boolean isCurrentMonthDay(Calendar day) {
+        return day.get(Calendar.MONTH) == mPageMonth &&
+                !((mCalendarProperties.getMinimumDate() != null && day.before(mCalendarProperties.getMinimumDate()))
+                    || (mCalendarProperties.getMaximumDate() != null & day.after(mCalendarProperties.getMaximumDate())));
+    }
+    private void loadIcon(ImageView ivDay, Calendar day) {
+
     }
 }
