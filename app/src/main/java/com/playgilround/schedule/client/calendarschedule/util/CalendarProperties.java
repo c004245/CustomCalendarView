@@ -69,24 +69,6 @@ public class CalendarProperties {
         mMaximumDate = maximumDate;
     }
 
-    //다음 달
-    public OnCalendarPageChangeListener getOnForwardPageChangeListener() {
-        return mOnForwardPageChangeListener;
-    }
-
-    public void setOnForwardPageChangeListener(OnCalendarPageChangeListener onForwardPageChangeListener) {
-        mOnForwardPageChangeListener = onForwardPageChangeListener;
-    }
-
-    //저번 달
-    public OnCalendarPageChangeListener getOnPreviousPageChangeListener() {
-        return mOnPreviousPageChangeListener;
-    }
-
-    public void setOnPreviousPageChangeListener(OnCalendarPageChangeListener onPreviousPageChangeListener) {
-        mOnPreviousPageChangeListener = onPreviousPageChangeListener;
-    }
-
     public int getItemLayoutResource() {
         return mItemLayoutResource;
     }

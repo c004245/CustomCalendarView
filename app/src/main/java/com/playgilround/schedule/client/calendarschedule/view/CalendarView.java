@@ -159,10 +159,6 @@ public class CalendarView extends LinearLayout {
     private void setUpCalendarPosition(Calendar calendar) {
         DateUtils.setMidnight(calendar);
 
-        if (mCalendarProperties.getCalendarType() == CalendarView.ONE_DAY_PICKER) {
-
-        }
-
         mCalendarProperties.getFirstPageDate().setTime(calendar.getTime());
         mCalendarProperties.getFirstPageDate().add(Calendar.MONTH, -FIRST_VISIBLE_PAGE);
 
@@ -181,10 +177,8 @@ public class CalendarView extends LinearLayout {
         @Override
         public void onPageSelected(int position) {
             Calendar calendar = (Calendar) mCalendarProperties.getFirstPageDate().clone();
-            //calendar.plusMonths(position);
             calendar.add(Calendar.MONTH, position);
 
-            Log.d(TAG, "PlusDate ->" + position);
             if (!isScrollingLimited(calendar, position)) {
                 setHeaderName(calendar, position);
             }
@@ -198,19 +192,10 @@ public class CalendarView extends LinearLayout {
 
     private void setHeaderName(Calendar dateTime, int position) {
         tvDate.setText(DateUtils.getMonthAndYearDate(mContext, dateTime));
-        Log.d(TAG, "Text Date --->" + DateUtils.getMonthAndYearDate(mContext, dateTime));
         callOnPageChangeListeners(position);
     }
 
     private void callOnPageChangeListeners(int position) {
-        if (position > mCurrentPage && mCalendarProperties.getOnForwardPageChangeListener() != null) {
-            mCalendarProperties.getOnForwardPageChangeListener().onChange();
-        }
-
-        if (position < mCurrentPage && mCalendarProperties.getOnPreviousPageChangeListener() != null) {
-            mCalendarProperties.getOnPreviousPageChangeListener().onChange();
-        }
-
         mCurrentPage = position;
     }
 
