@@ -140,6 +140,11 @@ public class CalendarView extends LinearLayout {
 
         AppearanceUtils.setPagesColor(getRootView(), mCalendarProperties.getPagesColor());
 
+        setCalendarRowLayout();
+    }
+
+    private void setCalendarRowLayout() {
+        mCalendarProperties.setItemLayoutResource(R.layout.calendar_view_day);
     }
 
     private void initCalendar() {
@@ -175,7 +180,7 @@ public class CalendarView extends LinearLayout {
 
         @Override
         public void onPageSelected(int position) {
-            Calendar calendar = mCalendarProperties.getFirstPageDate();
+            Calendar calendar = (Calendar) mCalendarProperties.getFirstPageDate().clone();
             //calendar.plusMonths(position);
             calendar.add(Calendar.MONTH, position);
 
