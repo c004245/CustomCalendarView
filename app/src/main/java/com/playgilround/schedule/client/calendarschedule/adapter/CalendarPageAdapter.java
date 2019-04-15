@@ -3,6 +3,7 @@ package com.playgilround.schedule.client.calendarschedule.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,15 +65,6 @@ public class CalendarPageAdapter extends PagerAdapter {
 
     //GridView에 일 추가.
     private void loadMonth(int position) {
-      /*  ArrayList<Date> days = new ArrayList<>();
-
-        DateTime dateTime = (DateTime) mCalendarProperties.getFirstPageDate();
-
-        dateTime.plusMonths(position);
-        dateTime.withDayOfMonth(1);
-
-        int dayOfWeek = dateTime.getDayOfWeek();*/
-
         ArrayList<Date> days = new ArrayList<>();
         Calendar calendar = (Calendar) mCalendarProperties.getFirstPageDate().clone();
 

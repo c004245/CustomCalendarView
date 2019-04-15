@@ -29,12 +29,7 @@ public class CalendarProperties {
             mPagesColor, mDaysLabelsColor, mAnotherMonthsDaysLabelsColor, mCalendarType,
             mDisabledDaysLabelsColor, mSelectionLabelColor, mSelectionColor, mTodayLabelColor, mHeaderVisibility;
 
-    private Drawable mPreviousButtonSrc, mForwardButtonSrc;
-
     private boolean mEventsEnabled;
-
-    private OnCalendarPageChangeListener mOnForwardPageChangeListener;
-    private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
 
     //private DateTime mMinimumDate, mMaximumDate;
     private Calendar mMinimumDate, mMaximumDate;

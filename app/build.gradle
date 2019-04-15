@@ -28,4 +28,10 @@ dependencies {
 
     //JodaTime
     implementation 'joda-time:joda-time:2.9.9'
+
+    //RecyclerView
+    implementation 'com.android.support:support-compat:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+
 }
