@@ -8,10 +8,10 @@
     <RelativeLayout
         android:id="@+id/calendarHeader"
         android:layout_width="match_parent"
-        android:layout_marginStart="24dp"
+        android:layout_height="56dp"
         android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:layout_height="56dp">
+        android:layout_marginStart="24dp"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvDate"
@@ -110,9 +110,38 @@
         <com.playgilround.schedule.client.calendarschedule.view.CalendarViewPager
             android:id="@+id/calendarViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlScheduleList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <com.playgilround.schedule.client.calendarschedule.view.ScheduleRecyclerView
+            android:id="@+id/rvScheduleList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:overScrollMode="never" />
+
+        <RelativeLayout
+            android:id="@+id/rlNoTask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/add_btn" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
