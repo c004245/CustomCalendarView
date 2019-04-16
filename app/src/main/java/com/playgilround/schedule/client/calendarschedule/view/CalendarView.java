@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +45,8 @@ public class CalendarView extends LinearLayout {
     private int mCurrentPage;
 
     private CalendarPageAdapter mCalendarPageAdapter;
+
+    private float mDownPosition[] = new float[2];
 
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -90,6 +94,9 @@ public class CalendarView extends LinearLayout {
         mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
     }
 
+    public void onCalendarScroll(float distanceY) {
+        Log.d(TAG, "onScroll....");
+    }
     //Calendar Properties Setting.
     private void initCalendarProperties(TypedArray typedArray) {
         int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
@@ -225,5 +232,42 @@ public class CalendarView extends LinearLayout {
 
         return false;
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "Action Down...");
+
+                mDownPosition[0] = ev.getRawX();
+                mDownPosition[1] = ev.getRawY();
+                mGestureDetector.onTouchEvent(ev);
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "Action Down...");
+                mDownPosition[0] = event.getRawX();
+                mDownPosition[1] = event.getRawY();
+                return true;
+
+            case MotionEvent.ACTION_MOVE:
+                Log.d(TAG, "Action Move...");
+                return true;
+            case MotionEvent.ACTION_UP:
+                Log.d(TAG, "Action Up...");
+            case MotionEvent.ACTION_CANCEL:
+                Log.d(TAG, "Action Cancel...");
+                return true;
+        }
+
+        return super.onTouchEvent(event);
+    }
+
 
 }
