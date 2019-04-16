@@ -2,16 +2,17 @@ package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
+import com.playgilround.schedule.client.calendarschedule.listener.OnScheduleScrollListener;
 import com.playgilround.schedule.client.calendarschedule.util.AppearanceUtils;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
@@ -35,6 +36,9 @@ public class CalendarView extends LinearLayout {
 
     private TextView tvDate;
     private CalendarViewPager mViewPager;
+    private RelativeLayout rlScheduleList;
+
+    private GestureDetector mGestureDetector;
 
     private int mCurrentPage;
 
@@ -77,6 +81,13 @@ public class CalendarView extends LinearLayout {
     private void initUIElements() {
         tvDate = findViewById(R.id.tvDate);
         mViewPager = findViewById(R.id.calendarViewPager);
+        rlScheduleList = findViewById(R.id.rlScheduleList);
+
+        initGestureDetector();
+    }
+
+    private void initGestureDetector() {
+        mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
     }
 
     //Calendar Properties Setting.
