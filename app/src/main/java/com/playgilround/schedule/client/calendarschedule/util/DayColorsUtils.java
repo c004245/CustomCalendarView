@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.util;
 
 import android.graphics.Typeface;
+import android.view.View;
 import android.widget.TextView;
 
 import com.playgilround.schedule.client.calendarschedule.R;
@@ -21,6 +22,18 @@ public class DayColorsUtils {
         tv.setTextColor(textColor);
         tv.setBackgroundResource(background);
     }
+
+    public static void setHideDays(TextView tv, int textColor, int typeface, int background) {
+        if (tv == null) {
+            return;
+        }
+
+        tv.setTypeface(null, typeface);
+        tv.setTextColor(textColor);
+        tv.setBackgroundResource(background);
+        tv.setVisibility(View.GONE);
+    }
+
 
     public static void setCurrentMonthDayColor(Calendar day, Calendar today, TextView tvLabel,
                                                CalendarProperties calendarProperties) {

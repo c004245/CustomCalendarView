@@ -3,6 +3,7 @@ package com.playgilround.schedule.client.calendarschedule.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,9 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
     private Calendar mToday = DateUtils.getCalendar();
 
     private CalendarProperties mCalendarProperties;
+
+    private static final String TAG = CalendarDayAdapter.class.getSimpleName();
+
 
     CalendarDayAdapter(CalendarPageAdapter calendarPageAdapter, Context context, CalendarProperties calendarProperties,
                        ArrayList<Date> dates, int pageMonth) {
@@ -79,10 +83,9 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
     }
 
     private boolean isCurrentMonthDay(Calendar day) {
-        return day.get(Calendar.MONTH) == mPageMonth &&
-                !((mCalendarProperties.getMinimumDate() != null && day.before(mCalendarProperties.getMinimumDate()))
-                    || (mCalendarProperties.getMaximumDate() != null & day.after(mCalendarProperties.getMaximumDate())));
+        return day.get(Calendar.MONTH) == mPageMonth;
     }
+
     private void loadIcon(ImageView ivDay, Calendar day) {
 
     }
