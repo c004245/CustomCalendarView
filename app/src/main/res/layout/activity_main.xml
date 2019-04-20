@@ -9,14 +9,29 @@
     <com.playgilround.schedule.client.calendarschedule.view.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
 
     <RelativeLayout
-        android:layout_below="@+id/calendarView"
         android:id="@+id/rlScheduleList"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:layout_below="@+id/calendarView"
         android:background="@android:color/white">
+
+
+        <com.playgilround.schedule.client.calendarschedule.view.ExpandIconView
+            android:id="@+id/expandIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            app:eiv_animationDuration="300"
+            app:eiv_color="#000"
+            app:eiv_colorIntermediate="@android:color/black"
+            app:eiv_colorLess="@android:color/black"
+            app:eiv_colorMore="@android:color/black"
+            app:eiv_roundedCorners="true"
+            app:eiv_switchColor="true" />
 
         <com.playgilround.schedule.client.calendarschedule.view.ScheduleRecyclerView
             android:id="@+id/rvScheduleList"
@@ -25,20 +40,7 @@
             android:orientation="vertical"
             android:overScrollMode="never" />
 
-        <RelativeLayout
-            android:id="@+id/rlNoTask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:src="@drawable/add_btn" />
-
-        </RelativeLayout>
     </RelativeLayout>
+
 
 </RelativeLayout>
