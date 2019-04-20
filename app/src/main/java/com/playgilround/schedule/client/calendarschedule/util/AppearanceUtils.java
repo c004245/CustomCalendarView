@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.util;
 
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,13 +46,13 @@ public final class AppearanceUtils {
 
     public static void setAbbreviationsLabels(View view, int color, int firstDayOfWeek) {
         List<TextView> labels = new ArrayList<>();
-        labels.add((TextView) view.findViewById(R.id.mondayLabel));
-        labels.add((TextView) view.findViewById(R.id.tuesdayLabel));
-        labels.add((TextView) view.findViewById(R.id.wednesdayLabel));
-        labels.add((TextView) view.findViewById(R.id.thursdayLabel));
-        labels.add((TextView) view.findViewById(R.id.fridayLabel));
-        labels.add((TextView) view.findViewById(R.id.saturdayLabel));
-        labels.add((TextView) view.findViewById(R.id.sundayLabel));
+        labels.add(view.findViewById(R.id.sundayLabel));
+        labels.add(view.findViewById(R.id.mondayLabel));
+        labels.add(view.findViewById(R.id.tuesdayLabel));
+        labels.add(view.findViewById(R.id.wednesdayLabel));
+        labels.add(view.findViewById(R.id.thursdayLabel));
+        labels.add(view.findViewById(R.id.fridayLabel));
+        labels.add(view.findViewById(R.id.saturdayLabel));
 
         String[] abbreviations = view.getContext().getResources().getStringArray(R.array.material_calendar_day_abbreviations_array);
         for (int i = 0; i < 7; i++) {
