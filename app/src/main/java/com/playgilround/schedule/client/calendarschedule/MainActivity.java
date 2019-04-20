@@ -3,7 +3,6 @@ package com.playgilround.schedule.client.calendarschedule;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout;
@@ -15,7 +14,7 @@ import com.playgilround.schedule.client.calendarschedule.view.ExpandIconView;
 public class MainActivity extends AppCompatActivity {
 
 
-    private boolean expanded = false;
+    private boolean expanded = true;
 
     static final String TAG = MainActivity.class.getSimpleName();
 
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     //State
     public static final int STATE_EXPANDED = 0;
     public static final int STATE_COLLAPSED = 1;
-    public static final int STATE_PROCESSING = 2;
     CalendarView calendarView;
     ViewPager mPageView;
 
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected ExpandIconView expandIconView;
 
-    private int mState = STATE_COLLAPSED;
+    private int mState = STATE_EXPANDED;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,32 +42,32 @@ public class MainActivity extends AppCompatActivity {
         mPageView = findViewById(R.id.calendarViewPager);
         expandIconView = findViewById(R.id.expandIcon);
 
-        mInitHeight = scrollView.getMeasuredHeight();
-
         ExpandIconView expandIconView = findViewById(R.id.expandIcon);
 
         expandIconView.setState(ExpandIconView.LESS, true);
 
         expandIconView.setOnClickListener(l -> {
-            Log.d(TAG, "mState ---> " + mState);
             if (expanded) {
-                Log.d(TAG, "Collapse Try this.");
-                collapse(400);
+                reduction(1000);
                 expanded = false;
 
             } else {
-                Log.d(TAG, "Expand Try this.");
-                expand(400);
+                expansion(1000);
                 expanded = true;
             }
         });
     }
 
-    public void collapse(int duration) {
-        if (getState() == STATE_EXPANDED) {
-            setState(STATE_PROCESSING);
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
 
-            final int currentHeight = 588;
+        mInitHeight = calendarView.getHeight();
+    }
+
+    //캘린더 축소
+    public void reduction(int duration) {
+        if (getState() == STATE_EXPANDED) {
+            final int currentHeight = mInitHeight;
             final int targetHeight = 166;
             final int topHeight = 166;
 
@@ -90,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         setState(STATE_COLLAPSED);
                     }
                 }
-//            }
             };
             anim.setDuration(duration);
             scrollView.startAnimation(anim);
@@ -98,17 +95,16 @@ public class MainActivity extends AppCompatActivity {
         expandIconView.setState(ExpandIconView.MORE, true);
     }
 
-    public void expand(int duration) {
+    //캘린더 확장
+    public void expansion(int duration) {
         if (getState() == STATE_COLLAPSED) {
-            setState(STATE_PROCESSING);
 
             final int currentHeight = 166;
-            final int targetHeight = 588;
+            final int targetHeight = mInitHeight;
 
             Animation anim = new Animation() {
                 @Override
                 protected void applyTransformation(float interpolatedTime, Transformation t) {
-
                     scrollView.getLayoutParams().height = (interpolatedTime == 1)
                             ? LinearLayout.LayoutParams.WRAP_CONTENT
                             : currentHeight - (int) ((currentHeight - targetHeight) * interpolatedTime);
@@ -134,13 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setState(int state) {
         this.mState = state;
-
-        if (mState == STATE_EXPANDED) {
-            expanded = false;
-        }
-        if (mState == STATE_COLLAPSED) {
-            expanded = true;
-        }
     }
 
 }

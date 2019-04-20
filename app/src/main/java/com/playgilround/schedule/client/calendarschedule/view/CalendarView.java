@@ -246,7 +246,7 @@ public class CalendarView extends LinearLayout {
         }
         return super.dispatchTouchEvent(ev);
     }
-    
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
