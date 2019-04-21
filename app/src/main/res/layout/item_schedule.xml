@@ -73,7 +73,7 @@
         app:civ_border_width="1dp"
         android:src="@color/colorPrimary"
         app:civ_border_color="@android:color/white"/>
-    
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
