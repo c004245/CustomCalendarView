@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="26dp">
+
+    <ImageView
+        android:id="@+id/ivSchedule"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="14.5dp"
+        android:background="@drawable/red_circle" />
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_toEndOf="@+id/ivSchedule"
+        android:layout_marginStart="14.5dp">
+
+        <TextView
+            android:id="@+id/tvScheduleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="롯데월드"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:layout_marginTop="14dp" />
+
+        <TextView
+            android:id="@+id/tvScheduleDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12.07~12.19"
+            android:textColor="@color/color_gray_light"
+            android:textStyle="normal"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivCircleUser1"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="183dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/test_profile"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@android:color/white"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivCircleUser2"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="205.7dp"
+        android:layout_centerVertical="true"
+        android:src="@color/colorAccent"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@android:color/white"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivCircleUser3"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="225.4dp"
+        android:layout_centerVertical="true"
+        app:civ_border_width="1dp"
+        android:src="@color/colorPrimary"
+        app:civ_border_color="@android:color/white"/>
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivBtn"
+        android:background="@drawable/chevron_right"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"/>
+</RelativeLayout>

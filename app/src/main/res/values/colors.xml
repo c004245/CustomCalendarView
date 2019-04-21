@@ -6,6 +6,7 @@
 
     <color name="light_indigo">#7165cd</color>
     <color name="color_gray_day">#8a8a8f</color>
+    <color name="color_gray_light">#bdbdbd</color>
 
     <color name="itemHighlightColor">#1F000000</color>
     <color name="nextMonthDayColor">#1F000000</color>

@@ -34,4 +34,7 @@
         <item>December</item>
     </array>
 
+    <string name="text_schedule">일정</string>
+
+
 </resources>

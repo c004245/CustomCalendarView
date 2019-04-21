@@ -12,7 +12,7 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
-        android:id="@+id/llExpandView"
+        android:id="@+id/rlExpandView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/calendarView"
@@ -38,7 +38,7 @@
         layout="@layout/schedule_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/llExpandView" />
+        android:layout_below="@+id/rlExpandView" />
 
 
 </RelativeLayout>
