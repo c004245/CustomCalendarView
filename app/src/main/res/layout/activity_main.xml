@@ -11,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <RelativeLayout
-        android:id="@+id/rlScheduleList"
+        android:id="@+id/llExpandView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_below="@+id/calendarView"
-        android:background="@android:color/white">
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendarView"
+        android:background="@android:color/white"
+        android:layout_centerHorizontal="true">
 
         <com.playgilround.schedule.client.calendarschedule.view.ExpandIconView
             android:id="@+id/expandIcon"
@@ -33,14 +32,13 @@
             app:eiv_roundedCorners="true"
             app:eiv_switchColor="true" />
 
-        <com.playgilround.schedule.client.calendarschedule.view.ScheduleRecyclerView
-            android:id="@+id/rvScheduleList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:overScrollMode="never" />
-
     </RelativeLayout>
+
+    <include
+        layout="@layout/schedule_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llExpandView" />
 
 
 </RelativeLayout>
