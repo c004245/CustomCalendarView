@@ -30,6 +30,7 @@ public class CalendarProperties {
 
     private boolean mEventsEnabled;
 
+    private int mPosition;
     //private DateTime mMinimumDate, mMaximumDate;
     private Calendar mMinimumDate, mMaximumDate;
 //    private DateTime mFirstPageCalendarDate = DateUtils.getDateTime();
@@ -211,5 +212,13 @@ public class CalendarProperties {
 
     public void setEventsEnabled(boolean eventsEnabled) {
         mEventsEnabled = eventsEnabled;
+    }
+
+    public int getCalendarPosition() {
+        return mPosition;
+    }
+
+    public void setCalendarPosition(int position) {
+        mPosition = position;
     }
 }

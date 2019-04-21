@@ -194,6 +194,8 @@ public class CalendarView extends LinearLayout {
 
         @Override
         public void onPageSelected(int position) {
+            mCalendarProperties.setCalendarPosition(position);
+
             Calendar calendar = (Calendar) mCalendarProperties.getFirstPageDate().clone();
             calendar.add(Calendar.MONTH, position);
 

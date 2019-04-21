@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,26 +67,55 @@ public class CalendarPageAdapter extends PagerAdapter {
     //GridView에 일 추가.
     private void loadMonth(int position) {
         ArrayList<Date> days = new ArrayList<>();
+        ArrayList<Date> curDays = new ArrayList<>();
+
         Calendar calendar = (Calendar) mCalendarProperties.getFirstPageDate().clone();
 
+        //오늘 날짜 얻기
         calendar.add(Calendar.MONTH, position);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
 
+        //Calendar 날짜가 무슨 요일인지?
+        //현재 달, 저번 달, 다음 달 기준
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+//        Log.d(TAG, "dayOfWeek ->" + dayOfWeek);
 
+        //한 주의 시작이 무슨 요일 인가.
         int firstDayOfWeek = calendar.getFirstDayOfWeek();
+
         int monthBeginningCell = (dayOfWeek < firstDayOfWeek ? 7 : 0) + dayOfWeek - firstDayOfWeek;
 
-        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+//        Log.d(TAG, "monthBeginning ->" + monthBeginningCell);
 
+        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+/*
+        Calendar calendar2 = mCalendarProperties.getFirstPageDate();
+        calendar2.add(Calendar.MONTH, position);
+        calendar2.set(Calendar.DAY_OF_MONTH, 1);*/
+
+//        Log.d(TAG, "set calendar2 ->" + calendar2.getTime());
+        int retPosition = mCalendarProperties.getCalendarPosition();
         while (days.size() < 42) {
+//            Calendar retCalendar =  ((Calendar) mCalendarProperties.getFirstPageDate().clone());
+//            retCalendar.add(Calendar.MONTH, retPosition);
+//            Log.d(TAG ,"Month Check ->" + retCalendar.get(Calendar.MONTH));
+//            Log.d(TAG, "view days ->" + calendar.get(Calendar.MONTH));
+//
             days.add(calendar.getTime());
             calendar.add(Calendar.DAY_OF_MONTH, 1);
+//            if (retCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+//                Log.d(TAG, "ret Days check ->" + calendar.getTime());
+//                curDays.add(calendar.getTime());
+//                calendar.add(Calendar.DAY_OF_MONTH, 1);
+//            } else {
+//                Log.d(TAG, "ret Days check ->" + calendar.getTime());
+//
+//            }
         }
 
         mPageMonth = calendar.get(Calendar.MONTH) - 1;
         CalendarDayAdapter calendarDayAdapter = new CalendarDayAdapter(this, mContext,
-                mCalendarProperties, days, mPageMonth);
+                mCalendarProperties, days, mPageMonth, position);
 
         mCalendarGridView.setAdapter(calendarDayAdapter);
     }

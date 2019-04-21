@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
     private CalendarPageAdapter mCalendarPageAdapter;
     private LayoutInflater mLayoutInflater;
     private int mPageMonth;
+    private int mPosition;
     private Calendar mToday = DateUtils.getCalendar();
 
     private CalendarProperties mCalendarProperties;
@@ -37,11 +39,12 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
 
     CalendarDayAdapter(CalendarPageAdapter calendarPageAdapter, Context context, CalendarProperties calendarProperties,
-                       ArrayList<Date> dates, int pageMonth) {
+                       ArrayList<Date> dates, int pageMonth, int position) {
         super(context, calendarProperties.getItemLayoutResource(), dates);
         mCalendarPageAdapter = calendarPageAdapter;
         mCalendarProperties = calendarProperties;
         mPageMonth = pageMonth < 0 ? 11 : pageMonth;
+        mPosition = position;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -72,13 +75,14 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     private void setLabelColors(TextView tvLabel, Calendar day) {
         //Setting not current month day color
-        if (!isCurrentMonthDay(day)) {
-            DayColorsUtils.setDayColors(tvLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
-                    Typeface.NORMAL, R.drawable.background_transparent);
+        if (isCurrentMonthDay(day)) {
+            DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
+
             return;
         }
+            DayColorsUtils.setDayColors(tvLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
+                    Typeface.NORMAL, R.drawable.background_transparent);
 
-        DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
 
     }
 
