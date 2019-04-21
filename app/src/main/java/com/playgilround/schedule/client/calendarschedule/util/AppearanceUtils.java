@@ -1,7 +1,5 @@
 package com.playgilround.schedule.client.calendarschedule.util;
 
-import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;

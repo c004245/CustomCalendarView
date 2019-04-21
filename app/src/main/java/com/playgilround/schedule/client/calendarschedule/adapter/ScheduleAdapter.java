@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
  */
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
-    public ScheduleAdapter() {
+    public ScheduleAdapter(Context context) {
 
     }
 

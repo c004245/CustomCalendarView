@@ -1,15 +1,20 @@
 package com.playgilround.schedule.client.calendarschedule;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.playgilround.schedule.client.calendarschedule.adapter.ScheduleAdapter;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarView;
 import com.playgilround.schedule.client.calendarschedule.view.ExpandIconView;
+import com.playgilround.schedule.client.calendarschedule.view.ScheduleRecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
     ScrollView scrollView;
 
     protected ExpandIconView expandIconView;
+    private ScheduleRecyclerView rvScheduleList;
+
 
     private int mState = STATE_EXPANDED;
+
+    private ScheduleAdapter mScheduleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView);
         mPageView = findViewById(R.id.calendarViewPager);
         expandIconView = findViewById(R.id.expandIcon);
+        rvScheduleList = findViewById(R.id.rvScheduleList);
 
         ExpandIconView expandIconView = findViewById(R.id.expandIcon);
 
@@ -56,6 +66,22 @@ public class MainActivity extends AppCompatActivity {
                 expanded = true;
             }
         });
+
+        initScheduleList();
+    }
+
+    @SuppressLint("WrongConstant")
+    private void initScheduleList() {
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        rvScheduleList.setLayoutManager(manager);
+        DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setSupportsChangeAnimations(false);
+        rvScheduleList.setItemAnimator(itemAnimator);
+
+        mScheduleAdapter = new ScheduleAdapter(this);
+        rvScheduleList.setAdapter(mScheduleAdapter);
     }
 
     @Override
