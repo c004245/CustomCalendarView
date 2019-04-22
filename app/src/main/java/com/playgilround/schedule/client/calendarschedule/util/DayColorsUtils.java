@@ -36,8 +36,11 @@ public class DayColorsUtils {
     }
 
     public static void setSelectedDayColors(TextView dayLabel, CalendarProperties calendarProperties) {
-        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
-                R.drawable.background_color_circle_selector);
+        dayLabel.setTypeface(null, Typeface.NORMAL);
+        dayLabel.setTextColor(calendarProperties.getSelectionLabelColor());
+        dayLabel.setBackgroundResource(R.drawable.background_color_circle_selector);
+//        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
+//                R.drawable.background_color_circle_selector);
 
         dayLabel.getBackground().setColorFilter(calendarProperties.getSelectionColor(),
                 PorterDuff.Mode.MULTIPLY);
@@ -46,7 +49,6 @@ public class DayColorsUtils {
                                                CalendarProperties calendarProperties) {
         if (today.equals(day)) {
             DayColorsUtils.setSelectedDayColors(tvLabel, calendarProperties);
-
         } else {
             setDayColors(tvLabel, calendarProperties.getDaysLabelsColor(), Typeface.NORMAL,
                     R.drawable.background_transparent);
