@@ -1,5 +1,6 @@
 package com.playgilround.schedule.client.calendarschedule.util;
 
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
@@ -34,12 +35,18 @@ public class DayColorsUtils {
         tv.setVisibility(View.GONE);
     }
 
+    public static void setSelectedDayColors(TextView dayLabel, CalendarProperties calendarProperties) {
+        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
+                R.drawable.background_color_circle_selector);
 
+        dayLabel.getBackground().setColorFilter(calendarProperties.getSelectionColor(),
+                PorterDuff.Mode.MULTIPLY);
+    }
     public static void setCurrentMonthDayColor(Calendar day, Calendar today, TextView tvLabel,
                                                CalendarProperties calendarProperties) {
         if (today.equals(day)) {
-            setDayColors(tvLabel, calendarProperties.getTodayLabelColor(), Typeface.BOLD,
-                    R.drawable.background_transparent);
+            DayColorsUtils.setSelectedDayColors(tvLabel, calendarProperties);
+
         } else {
             setDayColors(tvLabel, calendarProperties.getDaysLabelsColor(), Typeface.NORMAL,
                     R.drawable.background_transparent);
