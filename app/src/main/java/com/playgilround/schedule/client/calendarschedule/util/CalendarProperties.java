@@ -7,7 +7,9 @@ import androidx.core.content.ContextCompat;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.listener.OnDayClickListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * 19-03-31
@@ -40,6 +42,8 @@ public class CalendarProperties {
     private int mItemLayoutResource;
 
     private OnDayClickListener mOnDayClickListener;
+
+    private List<EventDay> mEventDays = new ArrayList<>();
 
 
     public CalendarProperties(Context context) {
@@ -231,5 +235,13 @@ public class CalendarProperties {
 
     public void setOnDayClickListener(OnDayClickListener onDayClickListener) {
         mOnDayClickListener = onDayClickListener;
+    }
+
+    public List<EventDay> getEventDays() {
+        return mEventDays;
+    }
+
+    public void setEventDays(List<EventDay> eventDays) {
+        mEventDays = eventDays;
     }
 }
