@@ -3,10 +3,13 @@ package com.playgilround.schedule.client.calendarschedule.listener;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
+import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.EventDay;
+import com.playgilround.schedule.client.calendarschedule.view.CalendarView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -42,8 +45,24 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
         if (mCalendarProperties.getOnDayClickListener() != null) {
             Log.d(TAG, "onClick DayRowClickListener.");
             onClick(day);
-
         }
+        Log.d(TAG, "mCalednarProperties type --->" + mCalendarProperties.getCalendarType());
+
+        switch (mCalendarProperties.getCalendarType()) {
+            case CalendarView.RANGE_PICKER:
+                //기본을 RANGE_PICKER.
+                selectRange(v, day);
+                break;
+        }
+    }
+
+    private void selectRange(View v, Calendar day) {
+        TextView tvDay = v.findViewById(R.id.dayLabel);
+
+        if (!isCurrentMonthDay(day)) {
+            return;
+        }
+
     }
 
     private void onClick(Calendar day) {
@@ -65,5 +84,15 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
     private void callOnClickListener(EventDay eventDay) {
         mCalendarProperties.getOnDayClickListener().onDayClick(eventDay);
+    }
+
+    private boolean isCurrentMonthDay(Calendar day) {
+        return day.get(Calendar.MONTH) == mPageMonth && isBetweenMinAndMax(day);
+    }
+
+    private boolean isBetweenMinAndMax(Calendar day) {
+        return !((mCalendarProperties.getMinimumDate() != null &&
+                    day.before(mCalendarProperties.getMinimumDate()))
+                || (mCalendarProperties.getMaximumDate() != null && day.after(mCalendarProperties.getMaximumDate())));
     }
 }

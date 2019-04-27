@@ -10,7 +10,8 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:selectionColor="@color/light_indigo"/>
+        app:selectionColor="@color/light_indigo"
+        app:type="range_picker"/>
 
     <RelativeLayout
         android:id="@+id/rlExpandView"
