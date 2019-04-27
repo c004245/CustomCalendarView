@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 
 import com.playgilround.schedule.client.calendarschedule.R;
+import com.playgilround.schedule.client.calendarschedule.listener.OnDayClickListener;
 
 import java.util.Calendar;
 
@@ -37,6 +38,8 @@ public class CalendarProperties {
     private Calendar mFirstPageCalendarDate = DateUtils.getCalendar();
 
     private int mItemLayoutResource;
+
+    private OnDayClickListener mOnDayClickListener;
 
 
     public CalendarProperties(Context context) {
@@ -220,5 +223,13 @@ public class CalendarProperties {
 
     public void setCalendarPosition(int position) {
         mPosition = position;
+    }
+
+    public OnDayClickListener getOnDayClickListener() {
+        return mOnDayClickListener;
+    }
+
+    public void setOnDayClickListener(OnDayClickListener onDayClickListener) {
+        mOnDayClickListener = onDayClickListener;
     }
 }

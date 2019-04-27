@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.playgilround.schedule.client.calendarschedule.R;
+import com.playgilround.schedule.client.calendarschedule.listener.DayRowClickListener;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarGridView;
 
@@ -60,6 +61,8 @@ public class CalendarPageAdapter extends PagerAdapter {
 
         loadMonth(position);
 
+        mCalendarGridView.setOnItemClickListener(new DayRowClickListener(this,
+                mCalendarProperties, mPageMonth));
         container.addView(mCalendarGridView);
         return mCalendarGridView;
     }
