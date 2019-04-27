@@ -9,11 +9,13 @@ import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.EventDay;
+import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarView;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static com.annimon.stream.Stream.*;
@@ -63,6 +65,11 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
             return;
         }
 
+        List<SelectedDay> selectedDays = mCalendarPageAdapter.getSelectedDays();
+
+        if (selectedDays.size() > 1) {
+            
+        }
     }
 
     private void onClick(Calendar day) {

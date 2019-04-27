@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.listener.DayRowClickListener;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
+import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarGridView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static com.playgilround.schedule.client.calendarschedule.util.CalendarProperties.CALENDAR_SIZE;
 
@@ -66,6 +68,25 @@ public class CalendarPageAdapter extends PagerAdapter {
         container.addView(mCalendarGridView);
         return mCalendarGridView;
     }
+
+    public List<SelectedDay> getSelectedDays() {
+        return mCalendarProperties.getSelectedDays();
+    }
+
+
+    public void setSelectedDay(SelectedDay selectedDay) {
+        mCalendarProperties.setSelectedDay(selectedDay);
+        inforDatePicker();
+    }
+
+    private void inforDatePicker() {
+        if (mCalendarProperties.getOnSelectionAbilityListener() != null) {
+            mCalendarProperties.getOnSelectionAbilityListener().onChange(mCalendarProperties.getSelectedDays().size() > 0);
+        }
+    }
+
+
+
 
     //GridView에 일 추가.
     private void loadMonth(int position) {

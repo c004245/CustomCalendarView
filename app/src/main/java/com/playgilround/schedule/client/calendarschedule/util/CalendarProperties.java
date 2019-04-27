@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.listener.OnDayClickListener;
+import com.playgilround.schedule.client.calendarschedule.listener.OnSelectionAbilityListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,9 +43,10 @@ public class CalendarProperties {
     private int mItemLayoutResource;
 
     private OnDayClickListener mOnDayClickListener;
+    private OnSelectionAbilityListener mOnSelectionAbilityListener;
 
     private List<EventDay> mEventDays = new ArrayList<>();
-
+    private List<SelectedDay> mSelectedDays = new ArrayList<>();
 
     public CalendarProperties(Context context) {
         mContext = context;
@@ -243,5 +245,22 @@ public class CalendarProperties {
 
     public void setEventDays(List<EventDay> eventDays) {
         mEventDays = eventDays;
+    }
+
+    public List<SelectedDay> getSelectedDays() {
+        return mSelectedDays;
+    }
+
+    public void setSelectedDay(SelectedDay selectedDay) {
+        mSelectedDays.clear();
+        mSelectedDays.add(selectedDay);
+    }
+
+    public OnSelectionAbilityListener getOnSelectionAbilityListener() {
+        return mOnSelectionAbilityListener;
+    }
+
+    public void setOnSelectionAbilityListener(OnSelectionAbilityListener onSelectionAbilityListener) {
+        mOnSelectionAbilityListener = onSelectionAbilityListener;
     }
 }
