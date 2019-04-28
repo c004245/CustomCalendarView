@@ -8,6 +8,9 @@ import android.widget.TextView;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
+import com.playgilround.schedule.client.calendarschedule.util.CalendarUtils;
+import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
+import com.playgilround.schedule.client.calendarschedule.util.DayColorsUtils;
 import com.playgilround.schedule.client.calendarschedule.util.EventDay;
 import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 import com.playgilround.schedule.client.calendarschedule.view.CalendarView;
@@ -67,9 +70,36 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
         List<SelectedDay> selectedDays = mCalendarPageAdapter.getSelectedDays();
 
+        Log.d(TAG, "selectedDay --->" + selectedDays);
         if (selectedDays.size() > 1) {
-            
+            clearAndSelectOne(tvDay, day);
         }
+
+        if (selectedDays.size() == 1) {
+            selectOneAndRange(tvDay, day);
+        }
+    }
+
+    private void clearAndSelectOne(TextView tvDay, Calendar day) {
+        of(mCalendarPageAdapter.getSelectedDays()).forEach(this::reverseUnselectedColor);
+        selectDay(tvDay, day);
+    }
+
+    private void selectOneAndRange(TextView tvDay, Calendar day) {
+        SelectedDay previousSelectedDay = mCalendarPageAdapter.getSelectedDay();
+
+//        of(CalendarUtils.get
+    }
+
+    private void reverseUnselectedColor(SelectedDay selectedDay) {
+        DayColorsUtils.setCurrentMonthDayColor(selectedDay.getCalendar(),
+                DateUtils.getCalendar(), (TextView) selectedDay.getView(), mCalendarProperties);
+    }
+
+    private void selectDay(TextView tvDay, Calendar day) {
+        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties);
+        mCalendarPageAdapter.setSelectedDay(new SelectedDay(tvDay, day));
+
     }
 
     private void onClick(Calendar day) {
