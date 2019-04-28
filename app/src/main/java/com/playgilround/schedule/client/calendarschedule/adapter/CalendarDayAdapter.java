@@ -12,10 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
 import com.playgilround.schedule.client.calendarschedule.util.DayColorsUtils;
+import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
+import com.playgilround.schedule.client.calendarschedule.view.CalendarView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,15 +78,29 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     private void setLabelColors(TextView tvLabel, Calendar day) {
         //Setting not current month day color
-        if (isCurrentMonthDay(day)) {
-            DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
-
-            return;
-        }
+        if (!isCurrentMonthDay(day)) {
             DayColorsUtils.setDayColors(tvLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
                     Typeface.NORMAL, R.drawable.background_transparent);
+            return;
+        }
+
+        // Set view for all SelectedDays
+        if (isSelectedDay(day)) {
+            Stream.of(mCalendarPageAdapter.getSelectedDays())
+                    .filter(selectedDay -> selectedDay.getCalendar().equals(day))
+                    .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
+
+            DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties);
+            return;
+        }
+            DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
 
 
+    }
+
+    private boolean isSelectedDay(Calendar day) {
+        return mCalendarProperties.getCalendarType() != CalendarView.CLASSIC && day.get(Calendar.MONTH) == mPageMonth
+                && mCalendarPageAdapter.getSelectedDays().contains(new SelectedDay(day));
     }
 
     private boolean isCurrentMonthDay(Calendar day) {
