@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     var mInitHeight : Int = 0
     var mState = STATE_EXPANDED
 
-    private lateinit var mScheduleAdapter: ScheduleAdapter;
+    private lateinit var mScheduleAdapter: ScheduleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
