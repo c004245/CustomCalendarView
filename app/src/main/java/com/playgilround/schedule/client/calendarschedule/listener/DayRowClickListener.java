@@ -78,6 +78,10 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
         if (selectedDays.size() == 1) {
             selectOneAndRange(tvDay, day);
         }
+
+        if (selectedDays.isEmpty()) {
+            selectDay(tvDay, day);
+        }
     }
 
     private void clearAndSelectOne(TextView tvDay, Calendar day) {
@@ -88,7 +92,13 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     private void selectOneAndRange(TextView tvDay, Calendar day) {
         SelectedDay previousSelectedDay = mCalendarPageAdapter.getSelectedDay();
 
-//        of(CalendarUtils.get
+        of(CalendarUtils.getDatesRange(previousSelectedDay.getCalendar(), day))
+                .forEach(calendar -> mCalendarPageAdapter.addSelectedDay(new SelectedDay(calendar)));
+
+        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties);
+
+        mCalendarPageAdapter.addSelectedDay(new SelectedDay(tvDay, day));
+        mCalendarPageAdapter.notifyDataSetChanged();;
     }
 
     private void reverseUnselectedColor(SelectedDay selectedDay) {

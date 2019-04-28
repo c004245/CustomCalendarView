@@ -83,6 +83,14 @@ public class CalendarPageAdapter extends PagerAdapter {
         inforDatePicker();
     }
 
+    public void addSelectedDay(SelectedDay selectedDay) {
+        if (!mCalendarProperties.getSelectedDays().contains(selectedDay)) {
+            mCalendarProperties.getSelectedDays().add(selectedDay);
+            inforDatePicker();
+            return;
+        }
+    }
+
     private void inforDatePicker() {
         if (mCalendarProperties.getOnSelectionAbilityListener() != null) {
             mCalendarProperties.getOnSelectionAbilityListener().onChange(mCalendarProperties.getSelectedDays().size() > 0);
