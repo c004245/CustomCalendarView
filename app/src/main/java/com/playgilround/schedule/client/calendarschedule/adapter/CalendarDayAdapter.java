@@ -91,9 +91,9 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
 
             if (day.equals(mCalendarPageAdapter.getFirstSelectedDay()) || day.equals(mCalendarPageAdapter.getLastSelectedDay())){
-                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, true);
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 1);
             } else {
-                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, false);
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 2);
             }
             return;
         }
