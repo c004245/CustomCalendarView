@@ -74,6 +74,15 @@ public class CalendarPageAdapter extends PagerAdapter {
         return mCalendarProperties.getSelectedDays();
     }
 
+    Calendar getFirstSelectedDay() {
+        return mCalendarProperties.getSelectedDays().get(0).getCalendar();
+    }
+
+    Calendar getLastSelectedDay() {
+        int size = mCalendarProperties.getSelectedDays().size();
+        return mCalendarProperties.getSelectedDays().get(size -1).getCalendar();
+    }
+
     public SelectedDay getSelectedDay() {
         return mCalendarProperties.getSelectedDays().get(0);
     }

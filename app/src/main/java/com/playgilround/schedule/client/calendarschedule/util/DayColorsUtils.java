@@ -35,20 +35,25 @@ public class DayColorsUtils {
         tv.setVisibility(View.GONE);
     }
 
-    public static void setSelectedDayColors(TextView dayLabel, CalendarProperties calendarProperties) {
+    //state true인 경우 첫째날 , 마지막 날로 판단
+    public static void setSelectedDayColors(TextView dayLabel, CalendarProperties calendarProperties, boolean state) {
         dayLabel.setTypeface(null, Typeface.NORMAL);
         dayLabel.setTextColor(calendarProperties.getSelectionLabelColor());
-        dayLabel.setBackgroundResource(R.drawable.background_color_circle_selector);
-//        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
-//                R.drawable.background_color_circle_selector);
+
+        if (state) {
+            dayLabel.setBackgroundResource(R.drawable.background_color_circle_selector);
+        } else {
+            dayLabel.setBackgroundResource(R.drawable.background_color_square_selector);
+        }
 
         dayLabel.getBackground().setColorFilter(calendarProperties.getSelectionColor(),
                 PorterDuff.Mode.MULTIPLY);
     }
+
     public static void setCurrentMonthDayColor(Calendar day, Calendar today, TextView tvLabel,
                                                CalendarProperties calendarProperties) {
         if (today.equals(day)) {
-            DayColorsUtils.setSelectedDayColors(tvLabel, calendarProperties);
+            DayColorsUtils.setSelectedDayColors(tvLabel, calendarProperties, false);
         } else {
             setDayColors(tvLabel, calendarProperties.getDaysLabelsColor(), Typeface.NORMAL,
                     R.drawable.background_transparent);

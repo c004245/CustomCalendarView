@@ -90,7 +90,11 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
                     .filter(selectedDay -> selectedDay.getCalendar().equals(day))
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
 
-            DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties);
+            if (day.equals(mCalendarPageAdapter.getFirstSelectedDay()) || day.equals(mCalendarPageAdapter.getLastSelectedDay())){
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, true);
+            } else {
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, false);
+            }
             return;
         }
             DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
