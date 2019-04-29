@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.playgilround.schedule.client.calendarschedule.R;
@@ -55,9 +56,13 @@ public class DayColorsUtils {
         } else if (state == 1) {
             dayLabel.setTextColor(Color.BLACK);
             dayLabel.setBackgroundResource(R.drawable.background_color_circle_selector);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            dayLabel.setLayoutParams(params);
         } else {
             dayLabel.setTextColor(Color.BLACK);
             dayLabel.setBackgroundResource(R.drawable.background_color_square_selector);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            dayLabel.setLayoutParams(params);
         }
 
     }
