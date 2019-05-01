@@ -12,14 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.playgilround.schedule.client.calendarschedule.R;
 import com.playgilround.schedule.client.calendarschedule.adapter.CalendarPageAdapter;
 import com.playgilround.schedule.client.calendarschedule.listener.OnScheduleScrollListener;
 import com.playgilround.schedule.client.calendarschedule.util.AppearanceUtils;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
+import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static com.playgilround.schedule.client.calendarschedule.util.CalendarProperties.FIRST_VISIBLE_PAGE;
 
@@ -235,6 +238,12 @@ public class CalendarView extends LinearLayout {
         return false;
     }
 
+    //List Of Calendar Object representing a selected dates
+    public List<Calendar> getSelectedDates() {
+        return Stream.of(mCalendarPageAdapter.getSelectedDays())
+                .map(SelectedDay::getCalendar)
+                .sortBy(calendar -> calendar).toList();
+    }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
