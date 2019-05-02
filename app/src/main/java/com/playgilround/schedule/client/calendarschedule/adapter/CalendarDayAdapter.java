@@ -90,10 +90,12 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
                     .filter(selectedDay -> selectedDay.getCalendar().equals(day))
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
 
-            if (day.equals(mCalendarPageAdapter.getFirstSelectedDay()) || day.equals(mCalendarPageAdapter.getLastSelectedDay())){
+            if (day.equals(mCalendarPageAdapter.getFirstSelectedDay())) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 1);
-            } else {
+            } else if (day.equals(mCalendarPageAdapter.getLastSelectedDay())){
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 2);
+            } else {
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 3);
             }
             return;
         }

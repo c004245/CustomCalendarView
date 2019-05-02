@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        ivAddSchedule.setOnClickListener { it ->
+        ivAddSchedule.setOnClickListener {
             val iterator = (calendarView.selectedDates).iterator()
             iterator.forEach {
                 Log.d(TAG, "calendar time ->" +it.time.toString())

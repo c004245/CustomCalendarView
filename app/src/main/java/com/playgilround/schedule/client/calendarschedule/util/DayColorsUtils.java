@@ -39,8 +39,9 @@ public class DayColorsUtils {
 
     /**
      * state 0 = Today
-     * state 1 = first, last day
-     * state 2 = 그 외
+     * state 1 = first
+     * state 2 = last
+     * state 3 = 그 외
      * @param dayLabel
      * @param calendarProperties
      * @param state
@@ -55,8 +56,15 @@ public class DayColorsUtils {
                     PorterDuff.Mode.MULTIPLY);
         } else if (state == 1) {
             dayLabel.setTextColor(Color.BLACK);
-            dayLabel.setBackgroundResource(R.drawable.background_color_circle_selector);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            dayLabel.setBackgroundResource(R.drawable.background_color_start_circle);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            dayLabel.setLayoutParams(params);
+        } else if (state == 2) {
+            dayLabel.setTextColor(Color.BLACK);
+            dayLabel.setBackgroundResource(R.drawable.background_color_end_circle);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
             dayLabel.setLayoutParams(params);
         } else {
             dayLabel.setTextColor(Color.BLACK);
