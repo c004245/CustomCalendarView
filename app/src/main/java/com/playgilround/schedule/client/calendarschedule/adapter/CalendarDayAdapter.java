@@ -80,10 +80,10 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
     private void setLabelColors(TextView tvLabel, Calendar day) {
         //Setting not current month day color
 
-        if (selCalendar == null) {
-            selCalendar = new ArrayList<>();
-            Log.d(TAG, "setLabel -> " + selCalendar.size());
-        }
+//        if (selCalendar == null) {
+//            selCalendar = new ArrayList<>();
+//            Log.d(TAG, "setLabel -> " + selCalendar.size());
+//        }
 
         if (!isCurrentMonthDay(day)) {
             DayColorsUtils.setDayColors(tvLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
@@ -91,31 +91,24 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
             return;
         }
 
-//        Log.d(TAG, "mCalendar Page ->" + mCalendarPageAdapter.getSelectedDays().size());
-
-
         // Set view for all SelectedDays
         if (isSelectedDay(day)) {
+
             Stream.of(mCalendarPageAdapter.getSelectedDays())
                     .filter(selectedDay -> selectedDay.getCalendar().equals(day))
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
 
-            selCalendar.add(day);
+//            selCalendar.add(day);
 
-//            if (day.equals(mCalendarPageAdapter.getFirstSelectedDay())) {
-            if (day.equals(selCalendar.get(0))) {
+            if (day.equals(mCalendarPageAdapter.getFirstSelectedDay())) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 1);
-            } else if (day.equals(selCalendar.get(selCalendar.size() -1))){
+            } else if (day.equals(mCalendarPageAdapter.getLastSelectedDay())) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 2);
             } else {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 3);
             }
-
-            Log.d(TAG, "Day check ->" + selCalendar.size());
-            Log.d(TAG, "Day check2 ->" + selCalendar.get(0).getTime());
-            Log.d(TAG, "Day check3 ->" + selCalendar.get(selCalendar.size() -1).getTime());
-
             return;
+
         }
             DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
 
