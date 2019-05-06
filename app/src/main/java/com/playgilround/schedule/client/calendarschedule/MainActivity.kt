@@ -33,19 +33,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        expandIcon.setState(ExpandIconView.LESS, true)
-
-        expandIcon.setOnClickListener {
-            if (expanded) {
-                reduction(1000)
-                expanded = false
-            } else {
-                expansion(1000)
-                expanded = true
-            }
-        }
-
         ivAddSchedule.setOnClickListener {
             val iterator = (calendarView.selectedDates).iterator()
             iterator.forEach {
@@ -74,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         mInitHeight = calendarView.height
     }
 
-    //캘린더 축소
+   /* //캘린더 축소
     fun reduction(duration: Int) {
         if (mState == STATE_EXPANDED) {
             val currentHeight = mInitHeight
@@ -129,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         expandIcon.setState(ExpandIconView.LESS, true)
-    }
+    }*/
     companion object {
         val STATE_EXPANDED = 0
         val STATE_COLLAPSED = 1

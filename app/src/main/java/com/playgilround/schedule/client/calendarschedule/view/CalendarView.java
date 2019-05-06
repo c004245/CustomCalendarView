@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ import java.util.List;
 
 import static com.playgilround.schedule.client.calendarschedule.util.CalendarProperties.FIRST_VISIBLE_PAGE;
 
-public class CalendarView extends LinearLayout {
+public class CalendarView extends FrameLayout {
 
     public static final int CLASSIC = 0;
     public static final int ONE_DAY_PICKER = 1;
@@ -42,6 +43,7 @@ public class CalendarView extends LinearLayout {
     private TextView tvDate;
     private CalendarViewPager mViewPager;
     private RelativeLayout rlScheduleList;
+    private ScheduleRecyclerView rvScheduleList;
 
     private GestureDetector mGestureDetector;
 
@@ -88,6 +90,7 @@ public class CalendarView extends LinearLayout {
     private void initUIElements() {
         tvDate = findViewById(R.id.tvDate);
         mViewPager = findViewById(R.id.calendarViewPager);
+        rvScheduleList = findViewById(R.id.rvScheduleList);
         rlScheduleList = findViewById(R.id.rlScheduleList);
 
         initGestureDetector();
