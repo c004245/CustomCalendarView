@@ -34,18 +34,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        expandIcon.setState(ExpandIconView.LESS, true)
-
-        expandIcon.setOnClickListener {
-            if (expanded) {
-                reduction(1000)
-                expanded = false
-            } else {
-                expansion(1000)
-                expanded = true
-            }
-        }
-
         ivAddSchedule.setOnClickListener {
             val iterator = (calendarView.selectedDates).iterator()
             iterator.forEach {
@@ -74,62 +62,6 @@ class MainActivity : AppCompatActivity() {
         mInitHeight = calendarView.height
     }
 
-    //캘린더 축소
-    fun reduction(duration: Int) {
-        if (mState == STATE_EXPANDED) {
-            val currentHeight = mInitHeight
-            val targetHeight = 166
-            val topHeight = 166
-
-            val anim = object:  Animation() {
-                override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                    scrollView.layoutParams.height = if (interpolatedTime == 1f)
-                        targetHeight
-                    else
-                        currentHeight - ((currentHeight - targetHeight) * interpolatedTime).toInt()
-                    scrollView.requestLayout()
-
-                    if (scrollView.measuredHeight < topHeight + targetHeight) {
-                        val position = topHeight + targetHeight - scrollView.measuredHeight
-                        scrollView.smoothScrollBy(0, position)
-                    }
-
-                    if (interpolatedTime == 1f)
-                       mState = STATE_COLLAPSED
-                }
-            }
-            anim.duration = duration.toLong()
-            scrollView.startAnimation(anim)
-        }
-
-        expandIcon.setState(ExpandIconView.MORE, true)
-    }
-
-    //캘린더 확장
-    fun expansion(duration: Int) {
-        if (mState == STATE_COLLAPSED) {
-            val currentHeight = 166
-            val targetHeight = mInitHeight
-
-            val anim = object : Animation() {
-                override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                    scrollView.layoutParams.height = if (interpolatedTime == 1f)
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    else
-                        currentHeight - ((currentHeight - targetHeight) * interpolatedTime).toInt()
-                    scrollView.requestLayout()
-
-                    if (interpolatedTime == 1f)
-                        mState = STATE_EXPANDED
-                }
-            }
-
-            anim.duration = duration.toLong()
-            scrollView.startAnimation(anim)
-        }
-
-        expandIcon.setState(ExpandIconView.LESS, true)
-    }
     companion object {
         val STATE_EXPANDED = 0
         val STATE_COLLAPSED = 1

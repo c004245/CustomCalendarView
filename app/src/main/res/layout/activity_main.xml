@@ -6,41 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.playgilround.schedule.client.calendarschedule.view.CalendarView
-        android:id="@+id/calendarView"
+    <com.playgilround.schedule.client.calendarschedule.view.ScheduleLayout
+        android:id="@+id/slSchedule"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:selectionColor="@color/light_indigo"
-        app:type="range_picker"/>
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rlExpandView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendarView"
-        android:background="@android:color/white"
-        android:layout_centerHorizontal="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.playgilround.schedule.client.calendarschedule.view.ExpandIconView
-            android:id="@+id/expandIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            app:eiv_animationDuration="300"
-            app:eiv_color="#000"
-            app:eiv_colorIntermediate="@android:color/black"
-            app:eiv_colorLess="@android:color/black"
-            app:eiv_colorMore="@android:color/black"
-            app:eiv_roundedCorners="true"
-            app:eiv_switchColor="true" />
+            <RelativeLayout
+                android:id="@+id/rlCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                <com.playgilround.schedule.client.calendarschedule.view.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectionColor="@color/light_indigo"
+                    app:type="range_picker" />
+            </RelativeLayout>
 
-    <include
-        layout="@layout/schedule_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rlExpandView" />
+
+            <include
+                layout="@layout/schedule_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+            
+    </com.playgilround.schedule.client.calendarschedule.view.ScheduleLayout>
 
     <ImageView
         android:id="@+id/btn_schedule"
@@ -51,5 +48,4 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="23dp"
         android:src="@drawable/add_schedule" />
-
 </RelativeLayout>
