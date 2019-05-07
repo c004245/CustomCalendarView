@@ -47,6 +47,7 @@ public class CalendarView extends FrameLayout {
     private CalendarViewPager mViewPager;
     private RelativeLayout rlScheduleList;
     private ScheduleRecyclerView rvScheduleList;
+    private CalendarView calendarView;
 
     private GestureDetector mGestureDetector;
 
@@ -56,8 +57,13 @@ public class CalendarView extends FrameLayout {
 
     private float mDownPosition[] = new float[2];
     private boolean mIsScrolling = false;
+    private boolean mCurrentRowsIsSix = true;
+    private int mAutoScrollDistance;
+
 
     private int mMinDistance;
+    private int mRowSize;
+
 
     private ScheduleState mState;
 
@@ -101,6 +107,7 @@ public class CalendarView extends FrameLayout {
         mViewPager = findViewById(R.id.calendarViewPager);
         rvScheduleList = findViewById(R.id.rvScheduleList);
         rlScheduleList = findViewById(R.id.rlScheduleList);
+        calendarView = findViewById(R.id.calendarView);
 
         initGestureDetector();
     }
@@ -110,7 +117,32 @@ public class CalendarView extends FrameLayout {
     }
 
     public void onCalendarScroll(float distanceY) {
-        Log.d(TAG, "onScroll....");
+        Log.d(TAG, "onScroll...." + mAutoScrollDistance);
+        distanceY = Math.min(distanceY, mAutoScrollDistance);
+
+        float calendarDistanceY = distanceY / (mCurrentRowsIsSix ? 5.0f : 4.0f);
+        int row = 1;
+
+        int calendarTop = -row * mRowSize;
+        int scheduleTop = mRowSize;
+
+        float calendarY = calendarView.getY() - calendarDistanceY * row;
+
+        calendarY = Math.min(calendarY, 0);
+        calendarY = Math.max(calendarY, calendarTop);
+
+        calendarView.setY(calendarY);
+
+        float scheduleY = rlScheduleList.getY() - distanceY;
+
+        if (mCurrentRowsIsSix) {
+            scheduleY = Math.min(scheduleY, calendarView.getHeight());
+        } else {
+            scheduleY = Math.min(scheduleY, calendarView.getHeight() - mRowSize);
+        }
+
+        scheduleY = Math.max(scheduleY, scheduleTop);
+        rlScheduleList.setY(scheduleY);
     }
 
     //Calendar Properties Setting.
@@ -175,6 +207,9 @@ public class CalendarView extends FrameLayout {
         AppearanceUtils.setPagesColor(getRootView(), mCalendarProperties.getPagesColor());
 
         mMinDistance = getResources().getDimensionPixelSize(R.dimen.calendar_min_distance);
+        mRowSize = getResources().getDimensionPixelSize(R.dimen.week_calendar_height);
+        mAutoScrollDistance = getResources().getDimensionPixelSize(R.dimen.auto_scroll_distance);
+
         setCalendarRowLayout();
     }
 
@@ -284,6 +319,8 @@ public class CalendarView extends FrameLayout {
 
             case MotionEvent.ACTION_MOVE:
                 Log.d(TAG, "Action Move...");
+                transferEvent(event);
+                mIsScrolling = true;
                 return true;
             case MotionEvent.ACTION_UP:
                 Log.d(TAG, "Action Up...");
@@ -293,6 +330,14 @@ public class CalendarView extends FrameLayout {
         }
 
         return super.onTouchEvent(event);
+    }
+
+    private void transferEvent(MotionEvent event) {
+        if (mState == ScheduleState.CLOSE) {
+            mGestureDetector.onTouchEvent(event);
+        } else {
+            mGestureDetector.onTouchEvent(event);
+        }
     }
 
     @Override
@@ -321,7 +366,4 @@ public class CalendarView extends FrameLayout {
         return mState == ScheduleState.CLOSE && (rvScheduleList.getChildCount() == 0
             || rvScheduleList.isScrollTop());
     }
-
-
-
 }
