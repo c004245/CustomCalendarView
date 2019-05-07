@@ -17,7 +17,6 @@ import com.playgilround.schedule.client.calendarschedule.adapter.ScheduleAdapter
 import com.playgilround.schedule.client.calendarschedule.view.ExpandIconView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.calendar_view.*
-import kotlinx.android.synthetic.main.schedule_view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

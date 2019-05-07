@@ -109,6 +109,9 @@ public class CalendarView extends FrameLayout {
         rlScheduleList = findViewById(R.id.rlScheduleList);
         calendarView = findViewById(R.id.calendarView);
 
+        Log.d(TAG, "calendar ->" + calendarView);
+
+        Log.d(TAG, "rlScheduleTest ->" + rlScheduleList);
         initGestureDetector();
     }
 
@@ -132,7 +135,9 @@ public class CalendarView extends FrameLayout {
         calendarY = Math.max(calendarY, calendarTop);
 
         calendarView.setY(calendarY);
+        Log.d(TAG, "calendar ->" + calendarView);
 
+        Log.d(TAG, "rlScheduleTest ->" + rlScheduleList);
         float scheduleY = rlScheduleList.getY() - distanceY;
 
         if (mCurrentRowsIsSix) {

@@ -13,12 +13,34 @@
         app:selectionColor="@color/light_indigo"
         app:type="range_picker">
 
-        <include
-            layout="@layout/schedule_view"
+        <RelativeLayout
+            android:id="@+id/rlScheduleList"
             android:layout_width="match_parent"
-            android:layout_marginTop="400dp"
             android:layout_height="match_parent"
-            />
+            android:layout_marginTop="400dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tvSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/text_schedule"
+                android:textColor="@color/light_indigo"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:layout_marginStart="24dp"/>
+
+            <com.playgilround.schedule.client.calendarschedule.view.ScheduleRecyclerView
+                android:layout_below="@+id/tvSchedule"
+                android:id="@+id/rvScheduleList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:overScrollMode="never" />
+        </RelativeLayout>
+
 
     </com.playgilround.schedule.client.calendarschedule.view.CalendarView>
 
