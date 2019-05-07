@@ -2,7 +2,9 @@ package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -20,6 +22,7 @@ import com.playgilround.schedule.client.calendarschedule.listener.OnScheduleScro
 import com.playgilround.schedule.client.calendarschedule.util.AppearanceUtils;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
+import com.playgilround.schedule.client.calendarschedule.util.ScheduleState;
 import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 
 import java.util.Calendar;
@@ -52,6 +55,12 @@ public class CalendarView extends FrameLayout {
     private CalendarPageAdapter mCalendarPageAdapter;
 
     private float mDownPosition[] = new float[2];
+    private boolean mIsScrolling = false;
+
+    private int mMinDistance;
+
+    private ScheduleState mState;
+
 
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -103,6 +112,7 @@ public class CalendarView extends FrameLayout {
     public void onCalendarScroll(float distanceY) {
         Log.d(TAG, "onScroll....");
     }
+
     //Calendar Properties Setting.
     private void initCalendarProperties(TypedArray typedArray) {
         int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
@@ -164,6 +174,7 @@ public class CalendarView extends FrameLayout {
 
         AppearanceUtils.setPagesColor(getRootView(), mCalendarProperties.getPagesColor());
 
+        mMinDistance = getResources().getDimensionPixelSize(R.dimen.calendar_min_distance);
         setCalendarRowLayout();
     }
 
@@ -247,6 +258,7 @@ public class CalendarView extends FrameLayout {
                 .map(SelectedDay::getCalendar)
                 .sortBy(calendar -> calendar).toList();
     }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
@@ -282,6 +294,34 @@ public class CalendarView extends FrameLayout {
 
         return super.onTouchEvent(event);
     }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (mIsScrolling) {
+            return true;
+        }
+
+        switch (ev.getActionMasked()) {
+            case MotionEvent.ACTION_MOVE:
+                float x = ev.getRawX();
+                float y = ev.getRawY();
+                float distanceX = Math.abs(x - mDownPosition[0]);
+                float distanceY = Math.abs(y - mDownPosition[1]);
+
+                if (distanceY > mMinDistance && distanceY > distanceX * 2.0f) {
+                    return (y > mDownPosition[1] && isRecyclerViewTouch()) || (y < mDownPosition[1] && mState == ScheduleState.OPEN);
+                }
+                break;
+        }
+
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    private boolean isRecyclerViewTouch() {
+        return mState == ScheduleState.CLOSE && (rvScheduleList.getChildCount() == 0
+            || rvScheduleList.isScrollTop());
+    }
+
 
 
 }
