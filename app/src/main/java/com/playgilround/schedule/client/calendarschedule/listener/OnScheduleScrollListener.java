@@ -23,7 +23,7 @@ public class OnScheduleScrollListener extends GestureDetector.SimpleOnGestureLis
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        mCalendarView.onCalendarScroll(distanceY);
+//        mCalendarView.onCalendarScroll(distanceY);
         return true;
     }
 }

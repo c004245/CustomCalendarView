@@ -2,12 +2,15 @@ package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import com.playgilround.schedule.client.calendarschedule.listener.OnScheduleScro
 import com.playgilround.schedule.client.calendarschedule.util.AppearanceUtils;
 import com.playgilround.schedule.client.calendarschedule.util.CalendarProperties;
 import com.playgilround.schedule.client.calendarschedule.util.DateUtils;
+import com.playgilround.schedule.client.calendarschedule.util.ScheduleState;
 import com.playgilround.schedule.client.calendarschedule.util.SelectedDay;
 
 import java.util.Calendar;
@@ -42,6 +46,7 @@ public class CalendarView extends LinearLayout {
     private TextView tvDate;
     private CalendarViewPager mViewPager;
     private RelativeLayout rlScheduleList;
+
 
     private GestureDetector mGestureDetector;
 
@@ -97,9 +102,6 @@ public class CalendarView extends LinearLayout {
         mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
     }
 
-    public void onCalendarScroll(float distanceY) {
-        Log.d(TAG, "onScroll....");
-    }
     //Calendar Properties Setting.
     private void initCalendarProperties(TypedArray typedArray) {
         int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
@@ -244,6 +246,7 @@ public class CalendarView extends LinearLayout {
                 .map(SelectedDay::getCalendar)
                 .sortBy(calendar -> calendar).toList();
     }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
@@ -257,28 +260,4 @@ public class CalendarView extends LinearLayout {
         }
         return super.dispatchTouchEvent(ev);
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "Action Down...");
-                mDownPosition[0] = event.getRawX();
-                mDownPosition[1] = event.getRawY();
-                return true;
-
-            case MotionEvent.ACTION_MOVE:
-                Log.d(TAG, "Action Move...");
-                return true;
-            case MotionEvent.ACTION_UP:
-                Log.d(TAG, "Action Up...");
-            case MotionEvent.ACTION_CANCEL:
-                Log.d(TAG, "Action Cancel...");
-                return true;
-        }
-
-        return super.onTouchEvent(event);
-    }
-
-
 }
