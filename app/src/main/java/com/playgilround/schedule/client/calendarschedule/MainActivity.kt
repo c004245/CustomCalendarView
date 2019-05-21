@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        slSchedule.setOnClickListener(this)
+
         ivAddSchedule.setOnClickListener {
             val iterator = (calendarView.selectedDates).iterator()
             iterator.forEach {

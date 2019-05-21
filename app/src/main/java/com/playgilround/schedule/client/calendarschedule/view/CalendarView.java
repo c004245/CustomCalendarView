@@ -94,14 +94,7 @@ public class CalendarView extends LinearLayout {
         tvDate = findViewById(R.id.tvDate);
         mViewPager = findViewById(R.id.calendarViewPager);
         rlScheduleList = findViewById(R.id.rlScheduleList);
-
-        initGestureDetector();
-    }
-
-    private void initGestureDetector() {
-        mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
-    }
-
+        }
     //Calendar Properties Setting.
     private void initCalendarProperties(TypedArray typedArray) {
         int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
@@ -245,19 +238,5 @@ public class CalendarView extends LinearLayout {
         return Stream.of(mCalendarPageAdapter.getSelectedDays())
                 .map(SelectedDay::getCalendar)
                 .sortBy(calendar -> calendar).toList();
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "Action Down...");
-
-                mDownPosition[0] = ev.getRawX();
-                mDownPosition[1] = ev.getRawY();
-                mGestureDetector.onTouchEvent(ev);
-                break;
-        }
-        return super.dispatchTouchEvent(ev);
     }
 }
