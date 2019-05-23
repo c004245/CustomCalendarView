@@ -25,7 +25,8 @@ public class ScheduleLayout extends LinearLayout {
     private boolean mIsScrolling = false;
 
     private int mMinDistance;
-
+    private int mAutoScrollDistance;
+    private int mRowSize;
     private ScheduleState mState;
 
     public ScheduleLayout(Context context) {
@@ -45,6 +46,9 @@ public class ScheduleLayout extends LinearLayout {
     private void initAttrs(TypedArray array) {
         mState = ScheduleState.OPEN;
         mMinDistance = getResources().getDimensionPixelSize(R.dimen.calendar_min_distance);
+        mAutoScrollDistance = getResources().getDimensionPixelSize(R.dimen.auto_scroll_distance);
+        mRowSize = getResources().getDimensionPixelSize(R.dimen.week_calendar_height);
+
     }
 
     private void initGestureDetector() {
@@ -72,6 +76,7 @@ public class ScheduleLayout extends LinearLayout {
                 return true;
 
             case MotionEvent.ACTION_CANCEL:
+                transferEvent(e);
                 resetScrollingState();
                 return true;
         }
@@ -133,5 +138,27 @@ public class ScheduleLayout extends LinearLayout {
 
     public void onCalendarScroll(float distanceY) {
         Log.d(TAG, "onCalendarScroll...");
+        distanceY = Math.min(distanceY, mAutoScrollDistance);
+
+        float calendarDistanceY = distanceY / (5.0f);
+        Log.d(TAG, "calendarDistanceY -->" + calendarDistanceY);
+
+        int row = 5;
+        int calendarTop = -row * mRowSize;
+
+        int scheduleTop = mRowSize;
+
+        float calendarY = calendarView.getY() - calendarDistanceY * row;
+        calendarY = Math.min(calendarY, 0);
+        calendarY = Math.max(calendarY, calendarTop);
+
+        calendarView.setY(calendarY);
+
+        float scheduleY = rlScheduleList.getY() - distanceY;
+
+        scheduleY = Math.min(scheduleY, calendarView.getHeight() - mRowSize);
+
+        scheduleY = Math.max(scheduleY, scheduleTop);
+        rlScheduleList.setY(scheduleY);
     }
 }
