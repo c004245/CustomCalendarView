@@ -36,4 +36,13 @@
         <attr name="eiv_animationDuration" format="integer"/>
         <attr name="eiv_padding" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="ScheduleLayout">
+        <attr name="default_view">
+            <enum name="month" value="0"/>
+            <enum name="week" value="1"/>
+        </attr>
+        <attr name="auto_change_month_row" format="boolean"/>
+    </declare-styleable>
+
 </resources>
