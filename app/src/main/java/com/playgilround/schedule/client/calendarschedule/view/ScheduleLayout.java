@@ -69,6 +69,10 @@ public class ScheduleLayout extends LinearLayout {
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "onDown...");
+                return true;
+
             case MotionEvent.ACTION_MOVE:
                 transferEvent(e);
                 Log.d(TAG, "onMove..");
