@@ -3,9 +3,12 @@ package com.playgilround.schedule.client.calendarschedule.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -55,6 +58,13 @@ public class ScheduleLayout extends LinearLayout {
     private void initGestureDetector() {
         Log.d(TAG, "onScheduleListener");
         mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        resetViewHeight(rlScheduleList, height - mRowSize);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     static final String TAG = ScheduleLayout.class.getSimpleName();
@@ -164,5 +174,13 @@ public class ScheduleLayout extends LinearLayout {
         rlScheduleList.setY(scheduleY);
 
         Log.d(TAG, "calendarY" + calendarY + " --" + scheduleY);
+    }
+
+    private void resetViewHeight(View v, int height) {
+        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+        if (layoutParams.height != height) {
+            layoutParams.height = height;
+            v.setLayoutParams(layoutParams);
+        }
     }
 }

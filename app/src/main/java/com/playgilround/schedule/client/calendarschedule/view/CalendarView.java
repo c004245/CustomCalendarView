@@ -45,10 +45,7 @@ public class CalendarView extends LinearLayout {
 
     private TextView tvDate;
     private CalendarViewPager mViewPager;
-    private RelativeLayout rlScheduleList;
 
-
-    private GestureDetector mGestureDetector;
 
     private int mCurrentPage;
 
@@ -93,8 +90,7 @@ public class CalendarView extends LinearLayout {
     private void initUIElements() {
         tvDate = findViewById(R.id.tvDate);
         mViewPager = findViewById(R.id.calendarViewPager);
-        rlScheduleList = findViewById(R.id.rlScheduleList);
-        }
+    }
     //Calendar Properties Setting.
     private void initCalendarProperties(TypedArray typedArray) {
         int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
