@@ -17,6 +17,7 @@ import com.playgilround.schedule.client.calendarschedule.util.ScheduleState;
 public class ScheduleLayout extends LinearLayout {
 
     private CalendarView calendarView;
+    private LinearLayout llCalendarView;
     private RelativeLayout rlScheduleList;
     private ScheduleRecyclerView rvScheduleList;
 
@@ -56,12 +57,12 @@ public class ScheduleLayout extends LinearLayout {
         mGestureDetector = new GestureDetector(getContext(), new OnScheduleScrollListener(this));
     }
 
-
     static final String TAG = ScheduleLayout.class.getSimpleName();
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        llCalendarView = findViewById(R.id.llCalendarView);
         calendarView = findViewById(R.id.calendarView);
         rlScheduleList = findViewById(R.id.rlScheduleList);
         rvScheduleList = findViewById(R.id.rvScheduleList);
@@ -139,30 +140,29 @@ public class ScheduleLayout extends LinearLayout {
             rvScheduleList.isScrollTop());
     }
 
-
     public void onCalendarScroll(float distanceY) {
         Log.d(TAG, "onCalendarScroll...");
         distanceY = Math.min(distanceY, mAutoScrollDistance);
 
         float calendarDistanceY = distanceY / (5.0f);
-        Log.d(TAG, "calendarDistanceY -->" + calendarDistanceY);
-
         int row = 5;
         int calendarTop = -row * mRowSize;
 
         int scheduleTop = mRowSize;
 
-        float calendarY = calendarView.getY() - calendarDistanceY * row;
+        float calendarY = llCalendarView.getY() - calendarDistanceY * row;
         calendarY = Math.min(calendarY, 0);
         calendarY = Math.max(calendarY, calendarTop);
 
-        calendarView.setY(calendarY);
+        llCalendarView.setY(calendarY);
 
         float scheduleY = rlScheduleList.getY() - distanceY;
 
-        scheduleY = Math.min(scheduleY, calendarView.getHeight() - mRowSize);
+        scheduleY = Math.min(scheduleY, llCalendarView.getHeight() - mRowSize);
 
         scheduleY = Math.max(scheduleY, scheduleTop);
         rlScheduleList.setY(scheduleY);
+
+        Log.d(TAG, "calendarY" + calendarY + " --" + scheduleY);
     }
 }
