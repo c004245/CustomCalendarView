@@ -153,21 +153,8 @@ public class ScheduleLayout extends LinearLayout {
     }
 
     public void onCalendarScroll(float distanceY) {
-        Log.d(TAG, "size check ->" + llCalendarHeader.getHeight());
-        Log.d(TAG, "onCalendarScroll...");
         distanceY = Math.min(distanceY, mAutoScrollDistance);
-
-//        float calendarDistanceY = distanceY / (5.0f);
-        int row = 5;
-        int calendarTop = -row * mRowSize;
-        Log.d(TAG, "calendarTop ->" + calendarTop);
-
-        int scheduleTop = mRowSize;
-
         float calendarY = llCalendarHeader.getHeight();
-
-
-        Log.d(TAG, "calendarY State ->" + calendarY);
 
         llCalendarView.setY(calendarY);
 
@@ -175,10 +162,8 @@ public class ScheduleLayout extends LinearLayout {
 
         scheduleY = Math.min(scheduleY, llCalendarView.getHeight() - mRowSize);
 
-        scheduleY = Math.max(scheduleY, scheduleTop);
+        scheduleY = Math.max(scheduleY, calendarY);
         rlScheduleList.setY(scheduleY);
-
-        Log.d(TAG, "calendarY" + calendarY + " --" + scheduleY);
     }
 
     private void resetViewHeight(View v, int height) {
