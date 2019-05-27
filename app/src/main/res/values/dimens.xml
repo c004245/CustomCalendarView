@@ -6,6 +6,6 @@
 
     <dimen name="calendar_min_distance">5dp</dimen>
     <dimen name="auto_scroll_distance">15dp</dimen>
-    <dimen name="week_calendar_height">48dp</dimen>
+    <dimen name="week_calendar_height">-48dp</dimen>
 
 </resources>

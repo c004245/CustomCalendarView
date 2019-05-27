@@ -23,6 +23,7 @@ public class ScheduleLayout extends LinearLayout {
     private LinearLayout llCalendarView;
     private RelativeLayout rlScheduleList;
     private ScheduleRecyclerView rvScheduleList;
+    private RelativeLayout llCalendarHeader;
 
     private GestureDetector mGestureDetector;
     private float mDownPosition[] = new float[2];
@@ -76,6 +77,7 @@ public class ScheduleLayout extends LinearLayout {
         calendarView = findViewById(R.id.calendarView);
         rlScheduleList = findViewById(R.id.rlScheduleList);
         rvScheduleList = findViewById(R.id.rvScheduleList);
+        llCalendarHeader = findViewById(R.id.calendarHeader);
     }
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -151,18 +153,21 @@ public class ScheduleLayout extends LinearLayout {
     }
 
     public void onCalendarScroll(float distanceY) {
+        Log.d(TAG, "size check ->" + llCalendarHeader.getHeight());
         Log.d(TAG, "onCalendarScroll...");
         distanceY = Math.min(distanceY, mAutoScrollDistance);
 
-        float calendarDistanceY = distanceY / (5.0f);
+//        float calendarDistanceY = distanceY / (5.0f);
         int row = 5;
         int calendarTop = -row * mRowSize;
+        Log.d(TAG, "calendarTop ->" + calendarTop);
 
         int scheduleTop = mRowSize;
 
-        float calendarY = llCalendarView.getY() - calendarDistanceY * row;
-        calendarY = Math.min(calendarY, 0);
-        calendarY = Math.max(calendarY, calendarTop);
+        float calendarY = llCalendarHeader.getHeight();
+
+
+        Log.d(TAG, "calendarY State ->" + calendarY);
 
         llCalendarView.setY(calendarY);
 
