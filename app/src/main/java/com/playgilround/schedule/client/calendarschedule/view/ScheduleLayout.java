@@ -65,6 +65,7 @@ public class ScheduleLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         resetViewHeight(rlScheduleList, height - mRowSize);
+        resetViewHeight(this, height);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -89,7 +90,6 @@ public class ScheduleLayout extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 transferEvent(e);
                 Log.d(TAG, "onMove..");
-                mIsScrolling = true;
                 return true;
 
             case MotionEvent.ACTION_CANCEL:
@@ -117,7 +117,7 @@ public class ScheduleLayout extends LinearLayout {
             case MotionEvent.ACTION_DOWN:
                 mDownPosition[0] = ev.getRawX();
                 mDownPosition[1] = ev.getRawY();
-
+                mGestureDetector.onTouchEvent(ev);
                 Log.d(TAG, "dispatch -->" + ev.getRawX() + "--" + ev.getRawY());
                 break;
         }
