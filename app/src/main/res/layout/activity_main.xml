@@ -46,32 +46,32 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <LinearLayout
             android:id="@+id/floatingAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:src="@android:drawable/ic_dialog_email"
+            android:background="@drawable/rounded"
             android:visibility="invisible"
-            app:fabSize="normal" />
+            android:orientation="horizontal"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <LinearLayout
             android:id="@+id/floatingModify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
             android:layout_gravity="center_horizontal"
-            android:src="@android:drawable/ic_menu_search"
             android:visibility="invisible"
-            app:fabSize="normal" />
+            android:orientation="horizontal" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <LinearLayout
             android:id="@+id/floatingDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@android:drawable/ic_lock_lock"
+            android:background="@drawable/rounded"
             android:visibility="invisible"
-            app:fabSize="normal" />
+            android:orientation="horizontal" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
