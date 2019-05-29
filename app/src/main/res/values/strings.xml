@@ -36,5 +36,6 @@
 
     <string name="text_schedule">일정</string>
 
+    <string name="toast_please_select_day">스케줄 날짜를 지정해주세요.</string>
 
 </resources>

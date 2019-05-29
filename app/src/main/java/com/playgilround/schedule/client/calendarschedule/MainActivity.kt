@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -29,16 +30,45 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mScheduleAdapter: ScheduleAdapter
 
+    private lateinit var fabOpen: Animation
+    private lateinit var fabClose: Animation
+
+    private var isFabOpen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_schedule.setOnClickListener {
-            val iterator = (calendarView.selectedDates).iterator()
-            iterator.forEach {
-                Log.d(TAG, "calendar time ->" +it.time.toString())
+        fabOpen = AnimationUtils.loadAnimation(applicationContext, R.anim.floating_open)
+        fabClose = AnimationUtils.loadAnimation(applicationContext, R.anim.floating_close)
+
+        floatingBtn.setOnClickListener {
+            isFabOpen = if (isFabOpen) {
+                floatingBtn.setImageResource(R.drawable.exit)
+                floatingAdd.startAnimation(fabClose)
+                floatingModify.startAnimation(fabClose)
+                floatingDelete.startAnimation(fabClose)
+                false
+            } else {
+                floatingBtn.setImageResource(R.drawable.add)
+                floatingAdd.startAnimation(fabOpen)
+                floatingModify.startAnimation(fabOpen)
+                floatingDelete.startAnimation(fabOpen)
+                true
             }
         }
+
+       /* floatingBtn.setOnClickListener {
+            floatingBtn.setImageResource(R.drawable.exit)
+            if (calendarView.selectedDates.size == 0) {
+                Toast.makeText(applicationContext, getString(R.string.toast_please_select_day), Toast.LENGTH_SHORT).show()
+            } else {
+                val iterator = (calendarView.selectedDates).iterator()
+                iterator.forEach {
+                    Log.d(TAG, "calendar time ->" + it.time.toString())
+                }
+            }
+        }*/
         initScheduleList()
     }
 
