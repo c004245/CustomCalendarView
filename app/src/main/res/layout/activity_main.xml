@@ -52,17 +52,30 @@
             android:layout_height="42dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded"
-            android:visibility="invisible"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add_schedule" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/floatingModify"
             android:layout_width="124dp"
             android:layout_height="42dp"
-            android:background="@drawable/rounded"
             android:layout_gravity="center_horizontal"
-            android:visibility="invisible"
-            android:orientation="horizontal" />
+            android:background="@drawable/rounded"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/modify_schedule" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/floatingDelete"
@@ -70,8 +83,14 @@
             android:layout_height="42dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded"
-            android:visibility="invisible"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete_schedule" />
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
