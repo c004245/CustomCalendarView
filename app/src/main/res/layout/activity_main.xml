@@ -50,46 +50,75 @@
             android:id="@+id/floatingAdd"
             android:layout_width="124dp"
             android:layout_height="42dp"
-            android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/add_schedule" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/text_schedule_add"
+                android:textSize="14sp"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/floatingModify"
             android:layout_width="124dp"
             android:layout_height="42dp"
-            android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/modify_schedule" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/text_schedule_modify"
+                android:textSize="14sp"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/floatingDelete"
             android:layout_width="124dp"
             android:layout_height="42dp"
-            android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/delete_schedule" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/text_schedule_delete"
+                android:textSize="14sp"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

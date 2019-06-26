@@ -15,4 +15,5 @@
     <color name="currentMonthDayColor">#de000000</color>
     <color name="defaultColor">#2962FF</color>
 
+    <color name="schedule_text_color">#5c4b69</color>
 </resources>
