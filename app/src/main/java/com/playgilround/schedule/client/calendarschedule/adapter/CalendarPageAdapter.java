@@ -1,10 +1,6 @@
 package com.playgilround.schedule.client.calendarschedule.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import static com.playgilround.schedule.client.calendarschedule.util.CalendarProperties.CALENDAR_SIZE;
 
@@ -51,6 +50,7 @@ public class CalendarPageAdapter extends PagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
@@ -58,7 +58,7 @@ public class CalendarPageAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container,int position) {
+    public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mCalendarGridView = (CalendarGridView) inflater.inflate(R.layout.calendar_view_grid, null);
 
@@ -75,12 +75,29 @@ public class CalendarPageAdapter extends PagerAdapter {
     }
 
     Calendar getFirstSelectedDay() {
-        return mCalendarProperties.getSelectedDays().get(0).getCalendar();
+        int size = mCalendarProperties.getSelectedDays().size();
+        Calendar firstCal = mCalendarProperties.getSelectedDays().get(0).getCalendar();
+        Calendar secondCal = mCalendarProperties.getSelectedDays().get(size - 1).getCalendar();
+
+        if (firstCal.before(secondCal)) {
+            return firstCal;
+        } else {
+            return secondCal;
+
+        }
     }
 
     Calendar getLastSelectedDay() {
         int size = mCalendarProperties.getSelectedDays().size();
-        return mCalendarProperties.getSelectedDays().get(size -1).getCalendar();
+        Calendar firstCal = mCalendarProperties.getSelectedDays().get(0).getCalendar();
+        Calendar secondCal = mCalendarProperties.getSelectedDays().get(size - 1).getCalendar();
+
+        if (firstCal.before(secondCal)) {
+            return secondCal;
+        } else {
+            return firstCal;
+
+        }
     }
 
     public SelectedDay getSelectedDay() {
@@ -106,8 +123,6 @@ public class CalendarPageAdapter extends PagerAdapter {
             mCalendarProperties.getOnSelectionAbilityListener().onChange(mCalendarProperties.getSelectedDays().size() > 0);
         }
     }
-
-
 
 
     //GridView에 일 추가.

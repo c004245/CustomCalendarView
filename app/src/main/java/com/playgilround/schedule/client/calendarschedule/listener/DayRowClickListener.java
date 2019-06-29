@@ -70,7 +70,6 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
         List<SelectedDay> selectedDays = mCalendarPageAdapter.getSelectedDays();
 
-        Log.d(TAG, "selectedDay --->" + selectedDays);
         if (selectedDays.size() > 1) {
             clearAndSelectOne(tvDay, day);
         }
