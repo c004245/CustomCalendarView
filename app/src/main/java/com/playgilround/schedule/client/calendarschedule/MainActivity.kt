@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
 
         floatingBtn.setOnClickListener {
             isFabOpen = if (isFabOpen) {
-                floatingBtn.setImageResource(R.drawable.exit)
+                floatingBtn.setImageResource(R.drawable.add)
                 floatingAdd.startAnimation(fabClose)
                 floatingModify.startAnimation(fabClose)
                 floatingDelete.startAnimation(fabClose)
                 false
             } else {
-                floatingBtn.setImageResource(R.drawable.add)
+                floatingBtn.setImageResource(R.drawable.exit)
                 floatingAdd.startAnimation(fabOpen)
                 floatingModify.startAnimation(fabOpen)
                 floatingDelete.startAnimation(fabOpen)
