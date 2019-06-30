@@ -106,7 +106,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     }
 
     private void selectDay(TextView tvDay, Calendar day) {
-        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 4);
+        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 3);
         mCalendarPageAdapter.setSelectedDay(new SelectedDay(tvDay, day));
 
     }
