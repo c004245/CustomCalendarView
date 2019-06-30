@@ -66,6 +66,12 @@ public class DayColorsUtils {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
             dayLabel.setLayoutParams(params);
+        } else if (state == 3) {
+            dayLabel.setTextColor(Color.BLACK);
+            dayLabel.setBackgroundResource(R.drawable.background_color_only_circle);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            dayLabel.setLayoutParams(params);
         } else {
             dayLabel.setTextColor(Color.BLACK);
             dayLabel.setBackgroundResource(R.drawable.background_color_square_selector);

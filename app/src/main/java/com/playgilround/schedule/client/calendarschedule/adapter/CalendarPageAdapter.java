@@ -1,6 +1,7 @@
 package com.playgilround.schedule.client.calendarschedule.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,11 +80,14 @@ public class CalendarPageAdapter extends PagerAdapter {
         Calendar firstCal = mCalendarProperties.getSelectedDays().get(0).getCalendar();
         Calendar secondCal = mCalendarProperties.getSelectedDays().get(size - 1).getCalendar();
 
-        if (firstCal.before(secondCal)) {
-            return firstCal;
+        if (size == 1) {
+            return null;
         } else {
-            return secondCal;
-
+            if (firstCal.before(secondCal)) {
+                return firstCal;
+            } else {
+                return secondCal;
+            }
         }
     }
 
@@ -92,11 +96,15 @@ public class CalendarPageAdapter extends PagerAdapter {
         Calendar firstCal = mCalendarProperties.getSelectedDays().get(0).getCalendar();
         Calendar secondCal = mCalendarProperties.getSelectedDays().get(size - 1).getCalendar();
 
-        if (firstCal.before(secondCal)) {
-            return secondCal;
+        if (size == 1) {
+            return null;
         } else {
-            return firstCal;
+            if (firstCal.before(secondCal)) {
+                return secondCal;
+            } else {
+                return firstCal;
 
+            }
         }
     }
 

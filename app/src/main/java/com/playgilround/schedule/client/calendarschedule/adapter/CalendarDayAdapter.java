@@ -2,8 +2,6 @@ package com.playgilround.schedule.client.calendarschedule.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.annotation.NonNull;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import androidx.annotation.NonNull;
 
 /**
  * 캘린더 하루 칸 로딩 Adapter
@@ -98,18 +98,19 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
                     .filter(selectedDay -> selectedDay.getCalendar().equals(day))
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(tvLabel));
 
-
             if (day.equals(mCalendarPageAdapter.getFirstSelectedDay())) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 1);
             } else if (day.equals(mCalendarPageAdapter.getLastSelectedDay())) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 2);
-            } else {
+            } else if (mCalendarPageAdapter.getFirstSelectedDay() == null || mCalendarPageAdapter.getLastSelectedDay() == null) {
                 DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 3);
+            } else {
+                DayColorsUtils.setSelectedDayColors(tvLabel, mCalendarProperties, 4);
             }
             return;
 
         }
-            DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
+        DayColorsUtils.setCurrentMonthDayColor(day, mToday, tvLabel, mCalendarProperties);
 
 
     }

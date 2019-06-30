@@ -94,7 +94,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
         of(CalendarUtils.getDatesRange(previousSelectedDay.getCalendar(), day))
                 .forEach(calendar -> mCalendarPageAdapter.addSelectedDay(new SelectedDay(calendar)));
 
-        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 3);
+        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 4);
 
         mCalendarPageAdapter.addSelectedDay(new SelectedDay(tvDay, day));
         mCalendarPageAdapter.notifyDataSetChanged();;
@@ -106,7 +106,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     }
 
     private void selectDay(TextView tvDay, Calendar day) {
-        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 3);
+        DayColorsUtils.setSelectedDayColors(tvDay, mCalendarProperties, 4);
         mCalendarPageAdapter.setSelectedDay(new SelectedDay(tvDay, day));
 
     }
