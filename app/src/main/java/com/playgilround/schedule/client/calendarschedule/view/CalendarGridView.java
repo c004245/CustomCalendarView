@@ -1,3 +1,4 @@
+/*
 package com.playgilround.schedule.client.calendarschedule.view;
 
 import android.content.Context;
@@ -26,3 +27,4 @@ public class CalendarGridView extends GridView {
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
 }
+*/
