@@ -1,3 +1,4 @@
+/*
 package com.playgilround.schedule.client.calendarschedule.adapter;
 
 import android.content.Context;
@@ -25,9 +26,11 @@ import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
 
+*/
 /**
  * 캘린더 하루 칸 로딩 Adapter
- */
+ *//*
+
 public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     private CalendarPageAdapter mCalendarPageAdapter;
@@ -128,3 +131,4 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     }
 }
+*/
